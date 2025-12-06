@@ -1,0 +1,7 @@
+{
+  "transitions": [
+    {"to": "workflow/Prepare"},
+    {"to": "workflow/Execute"},
+    {"to": "workflow/Finish"}
+  ]
+}

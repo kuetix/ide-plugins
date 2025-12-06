@@ -21,3 +21,11 @@ Thumbs.db
 
 # Build outputs
 distributions/
+
+# Temporary files
+temp/
+trash/
+*.log
+*.tmp
+*.bak
+*.swp

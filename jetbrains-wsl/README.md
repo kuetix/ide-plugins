@@ -12,7 +12,7 @@ This plugin provides comprehensive language support for the **Kuetix Workflow Sp
 - Keyword completion for all WSL keywords
 - Smart snippets for common patterns (workflow, state, action declarations)
 - Template insertions with cursor positioning
-- Dynamic module and method completion from `modules.json` (see [Module Completion Guide](MODULE_COMPLETION.md))
+- Dynamic module and method completion from `modules.json` (see [Module Completion Guide](trash/MODULE_COMPLETION.md))
   - Place a `modules.json` file in your project root to define custom modules
   - Get intelligent suggestions for module paths and methods
 
@@ -161,7 +161,7 @@ Define custom modules for code completion by creating a `modules.json` file in y
 }
 ```
 
-For more details, see [Modules Loading Guide](MODULES_LOADING.md).
+For more details, see [Modules Loading Guide](trash/MODULES_LOADING.md).
 
 ### Color Scheme
 

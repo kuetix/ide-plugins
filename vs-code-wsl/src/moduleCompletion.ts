@@ -47,7 +47,7 @@ export class ModuleCompletionProvider implements vscode.CompletionItemProvider {
 
         for (const pattern of patterns) {
             const watcher = vscode.workspace.createFileSystemWatcher(pattern);
-            
+
             watcher.onDidCreate(() => this.loadModules());
             watcher.onDidChange(() => this.loadModules());
             watcher.onDidDelete(() => this.loadModules());
@@ -66,6 +66,7 @@ export class ModuleCompletionProvider implements vscode.CompletionItemProvider {
         // Try to load from multiple locations
         const searchPaths = [
             'modules.json',
+            'modules/modules.json',
             'workflows/modules.json',
             'runtime/workflows/modules.json'
         ];
@@ -73,15 +74,15 @@ export class ModuleCompletionProvider implements vscode.CompletionItemProvider {
         for (const workspaceFolder of vscode.workspace.workspaceFolders) {
             for (const searchPath of searchPaths) {
                 const modulesPath = path.join(workspaceFolder.uri.fsPath, searchPath);
-                
+
                 if (fs.existsSync(modulesPath)) {
                     try {
                         const content = fs.readFileSync(modulesPath, 'utf-8');
                         const moduleData: ModulesData = JSON.parse(content);
-                        
+
                         // Merge modules from this file
                         Object.assign(this.modules, moduleData);
-                        
+
                         console.log(`Loaded modules from ${modulesPath}`);
                     } catch (error) {
                         console.error(`Error loading modules from ${modulesPath}:`, error);
@@ -102,19 +103,22 @@ export class ModuleCompletionProvider implements vscode.CompletionItemProvider {
         const textBeforeCursor = lineText.substring(0, position.character);
 
         // Check if we're in an action context
-        const actionMatch = textBeforeCursor.match(/action\s+([a-zA-Z0-9_/]*)/);
-        
+        let actionMatch = textBeforeCursor.match(/action\s+([a-zA-Z0-9_/.]*)([./])/);
+
         if (!actionMatch) {
-            return completionItems;
+            actionMatch = textBeforeCursor.match(/action\s+/);
+            if (!actionMatch) {
+                return completionItems;
+            }
         }
 
-        const currentPath = actionMatch[1];
-        const pathParts = currentPath.split('/');
+        const currentPath = actionMatch?.[1] ?? "";
+        const endsWithDot = actionMatch?.[2] ?? null;
 
-        // If we have a complete module path (namespace.module/), suggest methods
-        if (pathParts.length >= 2 && currentPath.endsWith('/')) {
-            const moduleKey = pathParts.slice(0, -1).join('/');
-            
+        // If we have a complete module path (namespace/module.), suggest methods
+        if (endsWithDot === ".") {
+            const moduleKey = currentPath;
+
             // Look for matching module
             for (const [key, moduleData] of Object.entries(this.modules)) {
                 if (key === moduleKey || key.endsWith('.' + moduleKey)) {
@@ -135,23 +139,18 @@ export class ModuleCompletionProvider implements vscode.CompletionItemProvider {
             const moduleKeys = Object.keys(this.modules);
             const seenPaths = new Set<string>();
 
-            for (const key of moduleKeys) {
-                const parts = key.split('.');
-                const namespace = parts.length > 1 ? parts[parts.length - 2] : parts[0];
-                const module = parts[parts.length - 1];
-                const modulePath = `${namespace}/${module}/`;
+            for (const namespace of moduleKeys) {
+                if (!seenPaths.has(namespace)) {
+                    seenPaths.add(namespace);
 
-                if (!seenPaths.has(modulePath)) {
-                    seenPaths.add(modulePath);
-
-                    const moduleData = this.modules[key];
+                    const moduleData = this.modules[namespace];
                     const item = new vscode.CompletionItem(
-                        modulePath,
+                        namespace,
                         vscode.CompletionItemKind.Module
                     );
                     item.detail = moduleData.info.label;
                     item.documentation = new vscode.MarkdownString(moduleData.info.description);
-                    item.insertText = modulePath;
+                    item.insertText = namespace;
                     completionItems.push(item);
                 }
             }

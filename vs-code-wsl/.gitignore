@@ -2,3 +2,11 @@ node_modules
 out
 .vscode-test
 *.vsix
+
+# Temporary files
+temp/
+trash/
+*.log
+*.tmp
+*.bak
+*.swp

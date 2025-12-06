@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f9779c8-efec-427e-aab8-c5b576b5feb8" name="Changes" comment="" />
+    <list default="true" id="8f9779c8-efec-427e-aab8-c5b576b5feb8" name="Changes" comment="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs">
+      <change afterPath="$PROJECT_DIR$/RELEASE_NOTES_v1.0.0.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +28,16 @@
       </state>
     </system>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="SIGN_OFF_COMMIT" value="true" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="$USER_HOME$/.gradle/wrapper/dists/gradle-8.14-bin/38aieal9i53h9rfe7vjup95b9/gradle-8.14" javaHome="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home" gradleVersion="8.14" />
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -34,6 +47,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="36RnfwSxtT4NH7rJx0WtCpM8Qf9" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -47,6 +63,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/anare/Projects/kuetix/ide-plugins/jetbrains-wsl",
@@ -123,12 +140,26 @@
       <updated>1764978359144</updated>
       <workItem from="1764978387904" duration="2027000" />
       <workItem from="1764980435306" duration="167000" />
-      <workItem from="1764980934078" duration="4502000" />
+      <workItem from="1764980934078" duration="5452000" />
     </task>
+    <task id="LOCAL-00001" summary="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs">
+      <option name="closed" value="true" />
+      <created>1764991860848</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1764991860848</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

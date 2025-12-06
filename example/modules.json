@@ -2,7 +2,7 @@
   "auth/login": {
     "info": {
       "namespace": "auth",
-      "class": "login",
+      "class": "LoginModule",
       "label": "Login Module",
       "description": "Handles user authentication and login operations"
     },
@@ -27,7 +27,7 @@
   "db/query": {
     "info": {
       "namespace": "db",
-      "class": "query",
+      "class": "QueryModule",
       "label": "Database Query",
       "description": "Execute database queries and operations"
     },
@@ -54,7 +54,7 @@
       }
     ]
   },
-  "http/request": {
+  "http.request": {
     "info": {
       "namespace": "http",
       "class": "RequestModule",
@@ -84,7 +84,7 @@
       }
     ]
   },
-  "response/json": {
+  "response.json": {
     "info": {
       "namespace": "response",
       "class": "JsonResponseModule",
@@ -109,7 +109,7 @@
       }
     ]
   },
-  "validation/rules": {
+  "validation.rules": {
     "info": {
       "namespace": "validation",
       "class": "ValidationModule",
