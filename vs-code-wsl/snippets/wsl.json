@@ -1,0 +1,108 @@
+{
+  "Module Declaration": {
+    "prefix": "module",
+    "body": [
+      "module ${1:namespace}.${2:moduleName}",
+      "",
+      "$0"
+    ],
+    "description": "Create a module declaration"
+  },
+  "Import Statement": {
+    "prefix": "import",
+    "body": [
+      "import ${1:namespace}/${2:module}"
+    ],
+    "description": "Import a module"
+  },
+  "Workflow": {
+    "prefix": "workflow",
+    "body": [
+      "workflow ${1:workflow_name} {",
+      "  start: ${2:InitialState}",
+      "",
+      "  state ${2:InitialState} {",
+      "    action ${3:module/method}(${4:params})",
+      "    on success -> ${5:NextState}",
+      "    on error -> ${6:ErrorState}",
+      "  }",
+      "",
+      "  state ${5:NextState} {",
+      "    action ${7:module/method}(${8:params})",
+      "    end ok",
+      "  }",
+      "",
+      "  state ${6:ErrorState} {",
+      "    action response/ResponseError(message: \"${9:Error message}\", code: ${10:500})",
+      "    end error",
+      "  }",
+      "}"
+    ],
+    "description": "Create a workflow structure"
+  },
+  "State": {
+    "prefix": "state",
+    "body": [
+      "state ${1:StateName}${2:(${3:params})} {",
+      "  action ${4:module/method}(${5:params})",
+      "  on success -> ${6:NextState}",
+      "  on error -> ${7:ErrorState}",
+      "}"
+    ],
+    "description": "Create a state"
+  },
+  "State with End": {
+    "prefix": "state-end",
+    "body": [
+      "state ${1:StateName}${2:(${3:params})} {",
+      "  action ${4:module/method}(${5:params})",
+      "  end ${6|ok,error|}",
+      "}"
+    ],
+    "description": "Create a terminal state"
+  },
+  "Action": {
+    "prefix": "action",
+    "body": [
+      "action ${1:module/method}(${2:params})${3: as ${4:Result}}"
+    ],
+    "description": "Create an action"
+  },
+  "Const Block": {
+    "prefix": "const",
+    "body": [
+      "const {",
+      "  ${1:key}: \"${2:value}\"$0",
+      "}"
+    ],
+    "description": "Create a const block"
+  },
+  "On Success": {
+    "prefix": "on-success",
+    "body": [
+      "on success -> ${1:NextState}${2:(${3:params})}"
+    ],
+    "description": "Create an on success transition"
+  },
+  "On Error": {
+    "prefix": "on-error",
+    "body": [
+      "on error -> ${1:ErrorState}${2:(${3:params})}"
+    ],
+    "description": "Create an on error transition"
+  },
+  "Variable Reference": {
+    "prefix": "$",
+    "body": [
+      "\\$${1:variable}${2:.${3:property}}"
+    ],
+    "description": "Create a variable reference"
+  },
+  "Template Expression": {
+    "prefix": "template",
+    "body": [
+      "\"<<${1:expression}${2:|${3:type}}>>\"$0"
+    ],
+    "description": "Create a template expression"
+  }
+}

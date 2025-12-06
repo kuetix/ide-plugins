@@ -1,0 +1,77 @@
+{
+  "name": "wsl-language-support",
+  "displayName": "WSL Language Support",
+  "description": "Provides language support for the Kuetix Workflow Specific Language (.wsl files)",
+  "version": "1.0.0",
+  "publisher": "kuetix",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "wsl",
+    "workflow",
+    "kuetix",
+    "language"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuetix/ide-plugins"
+  },
+  "activationEvents": [
+    "onLanguage:wsl"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "wsl",
+        "aliases": [
+          "WSL",
+          "Workflow Specific Language"
+        ],
+        "extensions": [
+          ".wsl"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/wsl-icon.svg",
+          "dark": "./images/wsl-icon.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "wsl",
+        "scopeName": "source.wsl",
+        "path": "./syntaxes/wsl.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "wsl",
+        "path": "./snippets/wsl.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT"
+}
