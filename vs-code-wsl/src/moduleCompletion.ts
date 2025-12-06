@@ -94,8 +94,8 @@ export class ModuleCompletionProvider implements vscode.CompletionItemProvider {
     provideCompletionItems(
         document: vscode.TextDocument,
         position: vscode.Position,
-        token: vscode.CancellationToken,
-        context: vscode.CompletionContext
+        _token: vscode.CancellationToken,
+        _context: vscode.CompletionContext
     ): vscode.ProviderResult<vscode.CompletionItem[] | vscode.CompletionList> {
         const completionItems: vscode.CompletionItem[] = [];
         const lineText = document.lineAt(position.line).text;
