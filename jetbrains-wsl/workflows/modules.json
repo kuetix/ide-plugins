@@ -1,0 +1,148 @@
+{
+  "auth.login": {
+    "info": {
+      "namespace": "auth",
+      "class": "LoginModule",
+      "label": "Login Module",
+      "description": "Handles user authentication and login operations"
+    },
+    "methods": [
+      {
+        "value": "authenticate",
+        "label": "authenticate(username, password)",
+        "description": "Authenticate user with username and password"
+      },
+      {
+        "value": "logout",
+        "label": "logout()",
+        "description": "Log out the current user session"
+      },
+      {
+        "value": "validateToken",
+        "label": "validateToken(token)",
+        "description": "Validate an authentication token"
+      }
+    ]
+  },
+  "db.query": {
+    "info": {
+      "namespace": "db",
+      "class": "QueryModule",
+      "label": "Database Query",
+      "description": "Execute database queries and operations"
+    },
+    "methods": [
+      {
+        "value": "select",
+        "label": "select(table, conditions)",
+        "description": "Select records from database table"
+      },
+      {
+        "value": "insert",
+        "label": "insert(table, data)",
+        "description": "Insert new record into database table"
+      },
+      {
+        "value": "update",
+        "label": "update(table, data, conditions)",
+        "description": "Update existing records in database table"
+      },
+      {
+        "value": "delete",
+        "label": "delete(table, conditions)",
+        "description": "Delete records from database table"
+      }
+    ]
+  },
+  "http.request": {
+    "info": {
+      "namespace": "http",
+      "class": "RequestModule",
+      "label": "HTTP Request",
+      "description": "Make HTTP requests to external services"
+    },
+    "methods": [
+      {
+        "value": "get",
+        "label": "get(url, headers)",
+        "description": "Send HTTP GET request"
+      },
+      {
+        "value": "post",
+        "label": "post(url, body, headers)",
+        "description": "Send HTTP POST request"
+      },
+      {
+        "value": "put",
+        "label": "put(url, body, headers)",
+        "description": "Send HTTP PUT request"
+      },
+      {
+        "value": "delete",
+        "label": "delete(url, headers)",
+        "description": "Send HTTP DELETE request"
+      }
+    ]
+  },
+  "response.json": {
+    "info": {
+      "namespace": "response",
+      "class": "JsonResponseModule",
+      "label": "JSON Response",
+      "description": "Format and send JSON responses"
+    },
+    "methods": [
+      {
+        "value": "success",
+        "label": "success(data, message)",
+        "description": "Send successful JSON response"
+      },
+      {
+        "value": "error",
+        "label": "error(message, code)",
+        "description": "Send error JSON response"
+      },
+      {
+        "value": "format",
+        "label": "format(data)",
+        "description": "Format data as JSON"
+      }
+    ]
+  },
+  "validation.rules": {
+    "info": {
+      "namespace": "validation",
+      "class": "ValidationModule",
+      "label": "Validation Rules",
+      "description": "Validate data against predefined rules"
+    },
+    "methods": [
+      {
+        "value": "required",
+        "label": "required(field)",
+        "description": "Check if field is required and not empty"
+      },
+      {
+        "value": "email",
+        "label": "email(field)",
+        "description": "Validate email format"
+      },
+      {
+        "value": "minLength",
+        "label": "minLength(field, length)",
+        "description": "Validate minimum string length"
+      },
+      {
+        "value": "maxLength",
+        "label": "maxLength(field, length)",
+        "description": "Validate maximum string length"
+      },
+      {
+        "value": "numeric",
+        "label": "numeric(field)",
+        "description": "Check if field contains only numbers"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,88 @@
+{
+  "runtime.config": {
+    "info": {
+      "namespace": "runtime",
+      "class": "ConfigModule",
+      "label": "Runtime Configuration",
+      "description": "Runtime configuration and environment settings"
+    },
+    "methods": [
+      {
+        "value": "get",
+        "label": "get(key)",
+        "description": "Get runtime configuration value by key"
+      },
+      {
+        "value": "set",
+        "label": "set(key, value)",
+        "description": "Set runtime configuration value"
+      },
+      {
+        "value": "reset",
+        "label": "reset()",
+        "description": "Reset runtime configuration to defaults"
+      }
+    ]
+  },
+  "runtime.logger": {
+    "info": {
+      "namespace": "runtime",
+      "class": "LoggerModule",
+      "label": "Runtime Logger",
+      "description": "Runtime logging and debugging utilities"
+    },
+    "methods": [
+      {
+        "value": "debug",
+        "label": "debug(message)",
+        "description": "Log debug message"
+      },
+      {
+        "value": "info",
+        "label": "info(message)",
+        "description": "Log info message"
+      },
+      {
+        "value": "warn",
+        "label": "warn(message)",
+        "description": "Log warning message"
+      },
+      {
+        "value": "error",
+        "label": "error(message)",
+        "description": "Log error message"
+      }
+    ]
+  },
+  "runtime.cache": {
+    "info": {
+      "namespace": "runtime",
+      "class": "CacheModule",
+      "label": "Runtime Cache",
+      "description": "Runtime caching operations"
+    },
+    "methods": [
+      {
+        "value": "get",
+        "label": "get(key)",
+        "description": "Get cached value by key"
+      },
+      {
+        "value": "set",
+        "label": "set(key, value, ttl)",
+        "description": "Set cached value with optional TTL"
+      },
+      {
+        "value": "delete",
+        "label": "delete(key)",
+        "description": "Delete cached value"
+      },
+      {
+        "value": "clear",
+        "label": "clear()",
+        "description": "Clear all cached values"
+      }
+    ]
+  }
+}
+

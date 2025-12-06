@@ -1,0 +1,97 @@
+<idea-plugin>
+    <id>com.kuetix.wsl</id>
+    <name>WSL Language Support</name>
+    <vendor email="support@kuetix.com" url="https://github.com/kuetix/engine">Kuetix</vendor>
+
+    <description><![CDATA[
+        <h2>WSL (Workflow Specific Language) Support for JetBrains IDEs</h2>
+        <p>Provides language support for the Kuetix Workflow Specific Language (.wsl files).</p>
+        <h3>Features:</h3>
+        <ul>
+            <li>Syntax highlighting for WSL workflows</li>
+            <li>Keyword completion for workflow elements</li>
+            <li>File type recognition and icons</li>
+            <li>Code structure navigation</li>
+            <li>Error highlighting</li>
+        </ul>
+        <h3>WSL Keywords:</h3>
+        <ul>
+            <li><b>module</b> - Declares a namespaced module name</li>
+            <li><b>import</b> - Brings other modules/namespaces into scope</li>
+            <li><b>extends</b> - Indicates inheritance of resolvers/configs</li>
+            <li><b>const</b> - Declares key/value constants</li>
+            <li><b>workflow</b> - Declares a workflow</li>
+            <li><b>state</b> - Defines a state block</li>
+            <li><b>action</b> - Specifies an action to execute</li>
+            <li><b>on success/error</b> - Transition conditions</li>
+            <li><b>end ok/error</b> - Terminal state markers</li>
+        </ul>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h3>Version 2023.3.0</h3>
+        <ul>
+            <li><b>Initial release</b> of WSL Language Support plugin</li>
+            <li>Full syntax highlighting for WSL files</li>
+            <li>Keyword completion for workflow elements</li>
+            <li>Dynamic module and method completion from modules.json files</li>
+            <li>Multi-source module loading (project root, workflows/, runtime/workflows/)</li>
+            <li>Auto-reload modules on file changes</li>
+            <li>Robust error handling - skip invalid modules gracefully</li>
+            <li>Code structure view for workflows and states</li>
+            <li>Brace matching and code commenting support</li>
+            <li>Customizable color scheme</li>
+            <li>Compatible with IntelliJ Platform 2023.3 - 2025.2</li>
+        </ul>
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- File Type -->
+        <fileType
+                name="WSL"
+                implementationClass="com.kuetix.wsl.language.WslFileType"
+                fieldName="INSTANCE"
+                language="WSL"
+                extensions="wsl"/>
+
+        <!-- Language -->
+        <lang.parserDefinition
+                language="WSL"
+                implementationClass="com.kuetix.wsl.parser.WslParserDefinition"/>
+
+        <!-- Syntax Highlighter -->
+        <lang.syntaxHighlighterFactory
+                language="WSL"
+                implementationClass="com.kuetix.wsl.highlighting.WslSyntaxHighlighterFactory"/>
+
+        <!-- Color Settings Page -->
+        <colorSettingsPage
+                implementation="com.kuetix.wsl.highlighting.WslColorSettingsPage"/>
+
+        <!-- Code Completion -->
+        <completion.contributor
+                language="WSL"
+                implementationClass="com.kuetix.wsl.completion.WslCompletionContributor"/>
+
+        <!-- Brace Matcher -->
+        <lang.braceMatcher
+                language="WSL"
+                implementationClass="com.kuetix.wsl.language.WslBraceMatcher"/>
+
+        <!-- Commenter -->
+        <lang.commenter
+                language="WSL"
+                implementationClass="com.kuetix.wsl.language.WslCommenter"/>
+
+        <!-- Structure View -->
+        <lang.psiStructureViewFactory
+                language="WSL"
+                implementationClass="com.kuetix.wsl.psi.WslStructureViewFactory"/>
+    </extensions>
+
+    <actions>
+        <!-- Add plugin actions here if needed -->
+    </actions>
+</idea-plugin>

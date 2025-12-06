@@ -1,0 +1,23 @@
+module example
+
+import services/common
+
+const {
+    event: "greet",
+    description: "A simple hello world workflow example",
+    version: "1.0.0"
+}
+
+workflow wsl_hello_world {
+  start: Hello
+
+  state Hello {
+    action converse/speak.Say(on: message, v: {response: $constants.event, statusCode: 202}) as ResponseAsValue
+    on success -> Response(ResponseAsValue)
+  }
+
+  state Response(ResponseAsValue) {
+    action services/common/response.ResponseValue(message: $ResponseAsValue.message, statusCode: $ResponseAsValue.message.statusCode|int)
+    end ok
+  }
+}

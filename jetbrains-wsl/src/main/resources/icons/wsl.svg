@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="wsl-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded rectangle -->
+  <rect x="1" y="1" width="14" height="14" rx="2" ry="2" fill="url(#wsl-gradient)"/>
+  <!-- WSL text -->
+  <text x="8" y="11" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="white" text-anchor="middle">WSL</text>
+  <!-- Workflow arrows -->
+  <path d="M3 4 L5 4 L5 3 L7 5 L5 7 L5 6 L3 6 Z" fill="rgba(255,255,255,0.6)"/>
+  <path d="M9 4 L11 4 L11 3 L13 5 L11 7 L11 6 L9 6 Z" fill="rgba(255,255,255,0.6)"/>
+</svg>
