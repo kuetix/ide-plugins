@@ -131,10 +131,50 @@ workflow user_login {
 - **String literals**: `"hello world"`
 - **Numbers**: `42`, `3.14`
 - **Booleans**: `true`, `false`
-- **References**: `$variable.path.to.value`
+- **References**: `$variable.path.to.value`, `$variable.array[0].nested[1].value`
 - **Templates**: `"<<expression|type>>"`
+- **Array literals**: `[item1, item2, ...]`
 - **Object literals**: `{key: value, ...}`
+- **Nested structures**: Arrays and objects can be nested, e.g., `[{key: [value1, value2]}]`
 - **Type casts**: `value|int`, `value|string`
+
+### Nested Arrays and Objects
+
+WSL supports deeply nested data structures with arrays and objects:
+
+```wsl
+workflow example {
+  start: CreateNestedData
+
+  state CreateNestedData {
+    action module/method(
+      data: [
+        {
+          response: [
+            {
+              event: $constants.event,
+              code: "Code202"
+            }
+          ],
+          statusCode: 202
+        }
+      ]
+    ) as Result
+    on success -> AccessNestedData(Result)
+  }
+
+  state AccessNestedData(Result) {
+    action module/method(
+      event: $Result.data[0].response[0].event,
+      code: $Result.data[0].response[0].code
+    )
+    end ok
+  }
+}
+```
+
+Array indexing uses square brackets (e.g., `[0]`, `[1]`) and can be combined with dot notation for nested property access.
+
 
 ## Configuration
 
