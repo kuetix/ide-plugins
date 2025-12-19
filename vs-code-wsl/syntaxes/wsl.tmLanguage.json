@@ -16,6 +16,12 @@
       "include": "#numbers"
     },
     {
+      "include": "#arrays"
+    },
+    {
+      "include": "#objects"
+    },
+    {
       "include": "#operators"
     },
     {
@@ -97,7 +103,7 @@
       "patterns": [
         {
           "name": "variable.other.dollar.wsl",
-          "match": "\\$[a-zA-Z_][a-zA-Z0-9_]*(\\.[a-zA-Z_][a-zA-Z0-9_]*)*"
+          "match": "\\$[a-zA-Z_][a-zA-Z0-9_]*(\\.[a-zA-Z_][a-zA-Z0-9_]*|\\[\\d+\\])*"
         },
         {
           "name": "entity.name.function.wsl",
@@ -110,6 +116,82 @@
         {
           "name": "variable.other.wsl",
           "match": "\\b[a-z_][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    },
+    "arrays": {
+      "patterns": [
+        {
+          "name": "meta.structure.array.wsl",
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "include": "#numbers"
+            },
+            {
+              "include": "#arrays"
+            },
+            {
+              "include": "#objects"
+            },
+            {
+              "include": "#identifiers"
+            },
+            {
+              "include": "#templates"
+            },
+            {
+              "name": "punctuation.separator.array.wsl",
+              "match": ","
+            }
+          ]
+        }
+      ]
+    },
+    "objects": {
+      "patterns": [
+        {
+          "name": "meta.structure.object.wsl",
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "include": "#numbers"
+            },
+            {
+              "include": "#arrays"
+            },
+            {
+              "include": "#objects"
+            },
+            {
+              "include": "#identifiers"
+            },
+            {
+              "include": "#templates"
+            },
+            {
+              "name": "punctuation.separator.key-value.wsl",
+              "match": ":"
+            },
+            {
+              "name": "punctuation.separator.object.wsl",
+              "match": ","
+            }
+          ]
         }
       ]
     },
