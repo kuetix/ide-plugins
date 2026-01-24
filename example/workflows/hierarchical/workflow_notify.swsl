@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Customer Notification Workflow
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module notification_sender
 
 workflow notify_customer

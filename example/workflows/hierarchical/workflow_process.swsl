@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Payment Processing Workflow
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module payment_processor
 
 workflow process_payment

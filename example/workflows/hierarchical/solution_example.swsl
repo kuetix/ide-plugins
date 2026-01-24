@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Payment Solution
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module payment_solution
 
 solution complete_payment_solution

@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Payment Feature
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module payment_processing
 
 feature payment_feature

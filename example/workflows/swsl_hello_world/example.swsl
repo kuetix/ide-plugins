@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Hello World
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module example
 
 workflow hello_world

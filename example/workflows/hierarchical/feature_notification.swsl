@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Notification Feature
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module notification_processing
 
 feature notification_feature

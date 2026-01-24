@@ -2,6 +2,8 @@
 
 This directory contains example workflows demonstrating both WSL (Workflow Specific Language) and SimplifiedWSL syntax.
 
+> **Note:** The SimplifiedWSL examples in the `hierarchical/` directory use demonstration modules (such as `payment`, `notification`, `context`, `services/common`, `errors`, `logger`) that are not defined in `modules.json`. These examples are designed to showcase SimplifiedWSL syntax and patterns, not to be executable workflows. For examples using the actual modules defined in `modules.json` (like `auth/login`, `db/query`, `http.request`, `response.json`, `validation.rules`), see the traditional WSL examples.
+
 ## Directory Structure
 
 ```

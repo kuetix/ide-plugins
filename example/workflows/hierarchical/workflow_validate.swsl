@@ -1,3 +1,6 @@
+// SimplifiedWSL Example: Payment Validation Workflow
+// Note: This example uses demonstration modules for syntax showcase purposes
+
 module payment_validation
 
 workflow validate_payment
