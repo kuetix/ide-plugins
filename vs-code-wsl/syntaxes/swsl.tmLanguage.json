@@ -105,7 +105,11 @@
         },
         {
           "name": "keyword.operator.terminal.swsl",
-          "match": "\\."
+          "match": "\\.$"
+        },
+        {
+          "name": "keyword.operator.terminal.swsl",
+          "match": "\\.(?=\\s|$)"
         },
         {
           "name": "keyword.operator.swsl",

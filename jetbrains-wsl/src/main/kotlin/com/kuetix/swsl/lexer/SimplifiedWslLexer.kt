@@ -140,7 +140,12 @@ class SimplifiedWslLexer : LexerBase() {
             while (tokenEnd < bufferEnd) {
                 val ch = peek()
                 if (ch == '\\') {
-                    consumeChars(2) // Skip escape sequence
+                    // Check if there's a character after the backslash
+                    if (tokenEnd + 1 < bufferEnd) {
+                        consumeChars(2) // Skip escape sequence
+                    } else {
+                        consumeChars() // Just skip the backslash at end
+                    }
                     continue
                 }
                 if (ch == '"') {

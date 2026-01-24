@@ -114,14 +114,14 @@
   "SimplifiedWSL Variable Reference": {
     "prefix": "$const",
     "body": [
-      "\\$constants.${1:key}"
+      "$constants.${1:key}"
     ],
     "description": "Reference a constant variable"
   },
   "SimplifiedWSL Context Variable": {
     "prefix": "$context",
     "body": [
-      "\\$context.${1:key}"
+      "$context.${1:key}"
     ],
     "description": "Reference a context variable"
   }
