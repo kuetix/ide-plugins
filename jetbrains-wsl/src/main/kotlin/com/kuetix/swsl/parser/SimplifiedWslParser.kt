@@ -66,8 +66,11 @@ class SimplifiedWslParser : PsiParser {
         builder.advanceLexer() // consume 'def'
         // Skip until we find terminal or end of line
         while (!builder.eof() && 
-               builder.tokenType != SimplifiedWslTokenTypes.DOT &&
-               !builder.tokenText.contains("\n")) {
+               builder.tokenType != SimplifiedWslTokenTypes.DOT) {
+            val tokenText = builder.tokenText
+            if (tokenText != null && tokenText.contains("\n")) {
+                break
+            }
             builder.advanceLexer()
         }
         if (builder.tokenType == SimplifiedWslTokenTypes.DOT) {
