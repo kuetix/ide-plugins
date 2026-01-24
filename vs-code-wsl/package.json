@@ -1,7 +1,7 @@
 {
   "name": "wsl-language-support",
   "displayName": "WSL Language Support",
-  "description": "Provides language support for the Kuetix Workflow Specific Language (.wsl files)",
+  "description": "Provides language support for the Kuetix Workflow Specific Language (.wsl and .swsl files)",
   "version": "1.0.0",
   "publisher": "kuetix",
   "icon": "images/icon.png",
@@ -13,16 +13,19 @@
   ],
   "keywords": [
     "wsl",
+    "swsl",
     "workflow",
     "kuetix",
-    "language"
+    "language",
+    "simplifiedwsl"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kuetix/ide-plugins"
   },
   "activationEvents": [
-    "onLanguage:wsl"
+    "onLanguage:wsl",
+    "onLanguage:swsl"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -41,6 +44,21 @@
           "light": "./images/wsl-icon.svg",
           "dark": "./images/wsl-icon.svg"
         }
+      },
+      {
+        "id": "swsl",
+        "aliases": [
+          "SimplifiedWSL",
+          "Simplified Workflow Specific Language"
+        ],
+        "extensions": [
+          ".swsl"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/wsl-icon.svg",
+          "dark": "./images/wsl-icon.svg"
+        }
       }
     ],
     "grammars": [
@@ -48,12 +66,21 @@
         "language": "wsl",
         "scopeName": "source.wsl",
         "path": "./syntaxes/wsl.tmLanguage.json"
+      },
+      {
+        "language": "swsl",
+        "scopeName": "source.swsl",
+        "path": "./syntaxes/swsl.tmLanguage.json"
       }
     ],
     "snippets": [
       {
         "language": "wsl",
         "path": "./snippets/wsl.json"
+      },
+      {
+        "language": "swsl",
+        "path": "./snippets/swsl.json"
       }
     ]
   },

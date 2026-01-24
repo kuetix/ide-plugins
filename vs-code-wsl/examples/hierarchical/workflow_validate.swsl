@@ -1,0 +1,16 @@
+module validate_payment
+
+workflow
+
+const {
+    minAmount: 1.00,
+    maxAmount: 10000.00
+}
+
+def errors.OnAnyError() as errorHandler -> .
+
+// Validate payment amount
+payment.ValidateAmount(min: $constants.minAmount, max: $constants.maxAmount) <- errorHandler ->
+
+// Validate payment method
+payment.ValidateMethod() <- errorHandler -> .

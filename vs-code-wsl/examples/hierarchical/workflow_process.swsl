@@ -1,0 +1,15 @@
+module process_payment
+
+workflow
+
+const {
+    currency: "USD"
+}
+
+def errors.OnAnyError() as errorHandler -> .
+
+// Process the transaction
+payment.ProcessTransaction(currency: $constants.currency) <- errorHandler ->
+
+// Record transaction
+payment.RecordTransaction() <- errorHandler -> .

@@ -1,0 +1,128 @@
+{
+  "SimplifiedWSL Feature": {
+    "prefix": "swsl-feature",
+    "body": [
+      "module ${1:module_name}",
+      "",
+      "feature ${2:feature_name}",
+      "",
+      "const {",
+      "\t${3:key}: ${4:value}",
+      "}",
+      "",
+      "def errors.LogError(level: \"error\") as errorHandler -> .",
+      "",
+      "${5:action.Call()} <- errorHandler -> ."
+    ],
+    "description": "Create a SimplifiedWSL feature template"
+  },
+  "SimplifiedWSL Solution": {
+    "prefix": "swsl-solution",
+    "body": [
+      "module ${1:module_name}",
+      "",
+      "solution ${2:solution_name}",
+      "",
+      "const {",
+      "\tenvironment: \"${3:production}\"",
+      "}",
+      "",
+      "def errors.HandleCriticalError(severity: \"critical\") as criticalError -> .",
+      "",
+      "// Call features",
+      "feature:${4:feature_name}() <- criticalError -> ."
+    ],
+    "description": "Create a SimplifiedWSL solution template"
+  },
+  "SimplifiedWSL Workflow": {
+    "prefix": "swsl-workflow",
+    "body": [
+      "module ${1:module_name}",
+      "",
+      "workflow ${2:workflow_name}",
+      "",
+      "const {",
+      "\t${3:key}: ${4:value}",
+      "}",
+      "",
+      "def errors.OnAnyError() as errorHandler -> .",
+      "",
+      "${5:action.Call()} <- errorHandler -> ."
+    ],
+    "description": "Create a SimplifiedWSL workflow template"
+  },
+  "SimplifiedWSL Module": {
+    "prefix": "swsl-module",
+    "body": [
+      "module ${1:module_name}",
+      "",
+      "${0}"
+    ],
+    "description": "Create a SimplifiedWSL module declaration"
+  },
+  "SimplifiedWSL Constants": {
+    "prefix": "swsl-const",
+    "body": [
+      "const {",
+      "\t${1:key}: ${2:value}",
+      "}"
+    ],
+    "description": "Create a constants block"
+  },
+  "SimplifiedWSL Error Handler": {
+    "prefix": "swsl-def-error",
+    "body": [
+      "def errors.${1:LogError}(${2:level}: \"${3:error}\") as ${4:errorHandler} -> ."
+    ],
+    "description": "Define an error handler"
+  },
+  "SimplifiedWSL Action Definition": {
+    "prefix": "swsl-def",
+    "body": [
+      "def ${1:namespace}.${2:Action}(${3:param}: ${4:value}) as ${5:alias} -> ."
+    ],
+    "description": "Define a reusable action"
+  },
+  "SimplifiedWSL Action Flow": {
+    "prefix": "swsl-flow",
+    "body": [
+      "${1:action.Call()} <- ${2:errorHandler} -> ."
+    ],
+    "description": "Create an action flow with error handling"
+  },
+  "SimplifiedWSL Action Chain": {
+    "prefix": "swsl-chain",
+    "body": [
+      "${1:action.First()} -> ${2:action.Second()} -> ${3:action.Third()} -> ."
+    ],
+    "description": "Create a chained action flow"
+  },
+  "SimplifiedWSL Call Workflow": {
+    "prefix": "swsl-call-workflow",
+    "body": [
+      "workflow:${1:workflow_name}(${2:params}) <- ${3:errorHandler} -> ."
+    ],
+    "description": "Call a workflow hierarchically"
+  },
+  "SimplifiedWSL Call Feature": {
+    "prefix": "swsl-call-feature",
+    "body": [
+      "feature:${1:feature_name}(${2:params}) <- ${3:errorHandler} -> ."
+    ],
+    "description": "Call a feature hierarchically"
+  },
+  "SimplifiedWSL Variable Reference": {
+    "prefix": "$const",
+    "body": [
+      "\\$constants.${1:key}"
+    ],
+    "description": "Reference a constant variable"
+  },
+  "SimplifiedWSL Context Variable": {
+    "prefix": "$context",
+    "body": [
+      "\\$context.${1:key}"
+    ],
+    "description": "Reference a context variable"
+  }
+}
