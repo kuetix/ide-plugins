@@ -1,0 +1,31 @@
+// SimplifiedWSL Example: Customer Notification Workflow
+// Note: This example uses demonstration modules for syntax showcase purposes
+
+module notification_sender
+
+workflow notify_customer
+
+const {
+    template: "payment_confirmation",
+    sender: "noreply@example.com"
+}
+
+def errors.NotificationError(reason: "send_failed") as notificationError -> .
+
+// Get customer email from context
+context.Get(key: "customer_email") as email ->
+
+// Send email notification
+notification.SendEmail(
+    to: $email,
+    from: $constants.sender,
+    template: $constants.template
+) <- notificationError ->
+
+// Send SMS if phone exists
+notification.SendSMS(
+    template: $constants.template
+) <- notificationError ->
+
+// Success response
+services/common.Response(message: "Notification sent", status: "ok") -> .

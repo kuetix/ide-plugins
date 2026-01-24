@@ -1,0 +1,29 @@
+// SimplifiedWSL Example: Payment Processing Workflow
+// Note: This example uses demonstration modules for syntax showcase purposes
+
+module payment_processor
+
+workflow process_payment
+
+const {
+    provider: "stripe",
+    currency: "USD"
+}
+
+def errors.ProcessingError(reason: "payment_failed") as processingError -> .
+
+// Get payment details from context
+context.Get(key: "payment_amount") as amount ->
+
+// Process payment with provider
+payment.ProcessPayment(
+    provider: $constants.provider,
+    amount: $amount,
+    currency: $constants.currency
+) <- processingError ->
+
+// Update payment status
+payment.UpdateStatus(status: "completed") <- processingError ->
+
+// Success response
+services/common.Response(message: "Payment processed", status: "ok") -> .

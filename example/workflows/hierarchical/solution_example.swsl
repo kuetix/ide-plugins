@@ -1,0 +1,25 @@
+// SimplifiedWSL Example: Payment Solution
+// Note: This example uses demonstration modules for syntax showcase purposes
+
+module payment_solution
+
+solution complete_payment_solution
+
+const {
+    environment: "production",
+    version: "1.0.0"
+}
+
+def errors.HandleCriticalError(severity: "critical") as criticalError -> .
+
+// Initialize payment context
+context.Set(key: "payment_amount", value: 100.00) ->
+
+// Call payment feature
+feature:payment_feature() <- criticalError ->
+
+// Call notification feature
+feature:notification_feature() <- criticalError ->
+
+// Finalize
+services/common.Response(message: "Payment completed", status: "success") -> .

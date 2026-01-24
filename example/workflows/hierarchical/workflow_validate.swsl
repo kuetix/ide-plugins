@@ -1,0 +1,25 @@
+// SimplifiedWSL Example: Payment Validation Workflow
+// Note: This example uses demonstration modules for syntax showcase purposes
+
+module payment_validation
+
+workflow validate_payment
+
+const {
+    minAmount: 0.01,
+    maxAmount: 10000.00
+}
+
+def errors.ValidationError(reason: "invalid_amount") as validationError -> .
+
+// Get payment amount from context
+context.Get(key: "payment_amount") as amount ->
+
+// Validate amount range
+payment.ValidateAmount(amount: $amount, min: $constants.minAmount, max: $constants.maxAmount) <- validationError ->
+
+// Validate payment method
+payment.ValidateMethod() <- validationError ->
+
+// Success response
+services/common.Response(message: "Validation successful", status: "ok") -> .
