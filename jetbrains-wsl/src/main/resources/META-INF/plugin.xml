@@ -5,14 +5,15 @@
 
     <description><![CDATA[
         <h2>WSL (Workflow Specific Language) Support for JetBrains IDEs</h2>
-        <p>Provides language support for the Kuetix Workflow Specific Language (.wsl files).</p>
+        <p>Provides language support for the Kuetix Workflow Specific Language (.wsl files) and SimplifiedWSL (.swsl files).</p>
         <h3>Features:</h3>
         <ul>
-            <li>Syntax highlighting for WSL workflows</li>
+            <li>Syntax highlighting for WSL and SimplifiedWSL workflows</li>
             <li>Keyword completion for workflow elements</li>
             <li>File type recognition and icons</li>
             <li>Code structure navigation</li>
             <li>Error highlighting</li>
+            <li>Support for hierarchical execution (feature, solution, workflow types)</li>
         </ul>
         <h3>WSL Keywords:</h3>
         <ul>
@@ -26,9 +27,28 @@
             <li><b>on success/error</b> - Transition conditions</li>
             <li><b>end ok/error</b> - Terminal state markers</li>
         </ul>
+        <h3>SimplifiedWSL Keywords:</h3>
+        <ul>
+            <li><b>def</b> - Defines reusable action definitions</li>
+            <li><b>feature</b> - Declares a feature workflow type</li>
+            <li><b>solution</b> - Declares a solution workflow type</li>
+            <li><b>-></b> - Forward flow operator</li>
+            <li><b><-</b> - Error binding operator</li>
+            <li><b>.</b> - Terminal operator</li>
+        </ul>
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>Version 2024.1.0</h3>
+        <ul>
+            <li><b>Added SimplifiedWSL support</b> (.swsl files)</li>
+            <li>Full syntax highlighting for SimplifiedWSL files</li>
+            <li>Support for SimplifiedWSL workflow types (feature, solution, workflow)</li>
+            <li>SimplifiedWSL operators: ->, <-, .</li>
+            <li>SimplifiedWSL def keyword for reusable definitions</li>
+            <li>Hierarchical execution examples</li>
+            <li>Comprehensive documentation</li>
+        </ul>
         <h3>Version 2023.3.0</h3>
         <ul>
             <li><b>Initial release</b> of WSL Language Support plugin</li>
@@ -89,6 +109,35 @@
         <lang.psiStructureViewFactory
                 language="WSL"
                 implementationClass="com.kuetix.wsl.psi.WslStructureViewFactory"/>
+
+        <!-- SimplifiedWSL Support -->
+        <!-- File Type -->
+        <fileType
+                name="SimplifiedWSL"
+                implementationClass="com.kuetix.swsl.language.SimplifiedWslFileType"
+                fieldName="INSTANCE"
+                language="SimplifiedWSL"
+                extensions="swsl"/>
+
+        <!-- Language -->
+        <lang.parserDefinition
+                language="SimplifiedWSL"
+                implementationClass="com.kuetix.swsl.parser.SimplifiedWslParserDefinition"/>
+
+        <!-- Syntax Highlighter -->
+        <lang.syntaxHighlighterFactory
+                language="SimplifiedWSL"
+                implementationClass="com.kuetix.swsl.highlighting.SimplifiedWslSyntaxHighlighterFactory"/>
+
+        <!-- Brace Matcher -->
+        <lang.braceMatcher
+                language="SimplifiedWSL"
+                implementationClass="com.kuetix.swsl.language.SimplifiedWslBraceMatcher"/>
+
+        <!-- Commenter -->
+        <lang.commenter
+                language="SimplifiedWSL"
+                implementationClass="com.kuetix.swsl.language.SimplifiedWslCommenter"/>
     </extensions>
 
     <actions>

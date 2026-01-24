@@ -1,16 +1,18 @@
 # WSL Language Support for VS Code
 
-This extension provides comprehensive language support for the **Kuetix Workflow Specific Language (WSL)** in Visual Studio Code.
+This extension provides comprehensive language support for the **Kuetix Workflow Specific Language (WSL)** and **SimplifiedWSL** in Visual Studio Code.
 
 ## Features
 
 ### Syntax Highlighting
-- Full syntax highlighting for WSL keywords, strings, numbers, comments, and operators
+- Full syntax highlighting for WSL and SimplifiedWSL keywords, strings, numbers, comments, and operators
+- Support for both `.wsl` and `.swsl` file extensions
 - Customizable color themes
 
 ### Code Completion
-- Keyword completion for all WSL keywords
+- Keyword completion for all WSL and SimplifiedWSL keywords
 - Smart snippets for common patterns (workflow, state, action declarations)
+- SimplifiedWSL-specific snippets (feature, solution, def, action flows)
 - Template insertions with cursor positioning
 - Dynamic module and method completion from `modules.json`
   - Place a `modules.json` file in your project root to define custom modules
@@ -22,7 +24,7 @@ This extension provides comprehensive language support for the **Kuetix Workflow
 - Auto-closing brackets and quotes
 
 ### File Type Recognition
-- Automatic recognition of `.wsl` files
+- Automatic recognition of `.wsl` and `.swsl` files
 - Custom file icon for WSL files
 
 ## Installation
@@ -63,6 +65,62 @@ vsce package
 ```
 
 The built extension will be in the current directory as a `.vsix` file.
+
+## SimplifiedWSL
+
+SimplifiedWSL (`.swsl`) is a streamlined syntax for WSL that removes verbosity while maintaining full engine compatibility.
+
+### Key Features
+
+- **No workflow wrappers**: Direct action flows without `workflow name { }` blocks
+- **Simplified operators**: `->` for flow, `<-` for error binding, `.` for terminal
+- **Workflow types**: Support for `feature`, `solution`, `workflow`, and custom types
+- **Inline definitions**: Use `def` for reusable action definitions
+- **Hierarchical execution**: Call workflows, features, and solutions
+
+### Basic SimplifiedWSL Example
+
+```swsl
+module payment_processing
+
+feature payment_feature
+
+const {
+    timeout: 5000,
+    retryCount: 3
+}
+
+def errors.LogError(level: "error") as errorHandler -> .
+
+// Validate payment
+workflow:validate_payment(timeout: $constants.timeout) <- errorHandler ->
+
+// Process payment
+workflow:process_payment(retries: $constants.retryCount) <- errorHandler ->
+
+// Send receipt
+payment.SendReceipt() <- errorHandler -> .
+```
+
+### SimplifiedWSL vs Traditional WSL
+
+**SimplifiedWSL** is ideal for:
+- Simple linear or branching workflows
+- Rapid prototyping
+- Reducing visual complexity
+- Quick scaffolding
+
+**Traditional WSL** is better for:
+- Multiple named workflows in one file
+- Advanced state management
+- Complex conditional logic
+- Explicit control over state names
+
+### Documentation
+
+- [SimplifiedWSL Guide](./SIMPLIFIED_WSL.md) - Complete syntax reference
+- [Hierarchical Execution](./HIERARCHICAL_EXECUTION.md) - Workflow orchestration patterns
+- [Examples](./examples/hierarchical/) - Working examples
 
 ## WSL Language Overview
 
@@ -171,6 +229,7 @@ The extension automatically watches for changes to `modules.json` files in:
 
 The extension includes helpful code snippets:
 
+**WSL Snippets:**
 - `module` - Create a module declaration
 - `import` - Import statement
 - `workflow` - Create a complete workflow structure
@@ -182,12 +241,29 @@ The extension includes helpful code snippets:
 - `on-error` - Error transition
 - `template` - Template expression
 
+**SimplifiedWSL Snippets:**
+- `swsl-feature` - Create a feature template
+- `swsl-solution` - Create a solution template
+- `swsl-workflow` - Create a workflow template
+- `swsl-module` - Module declaration
+- `swsl-const` - Constants block
+- `swsl-def-error` - Define error handler
+- `swsl-def` - Define reusable action
+- `swsl-flow` - Action flow with error handling
+- `swsl-chain` - Chained action flow
+- `swsl-call-workflow` - Call workflow hierarchically
+- `swsl-call-feature` - Call feature hierarchically
+
 Type the prefix and press `Tab` to expand the snippet.
 
 ## Examples
 
 Check the `examples/` directory for:
 - `login.wsl` - A complete user login workflow
+- `hierarchical/` - SimplifiedWSL hierarchical execution examples
+  - `solution_example.swsl` - Solution orchestrating features
+  - `feature_payment.swsl` - Feature orchestrating workflows
+  - `workflow_validate.swsl` - Workflow with actions
 - `modules.json` - Sample module definitions
 
 ## Requirements
@@ -213,6 +289,15 @@ This extension is part of the Kuetix Engine project. See the LICENSE file in the
 - **Repository**: https://github.com/kuetix/ide-plugins
 
 ## Release Notes
+
+### 1.1.0
+
+Added SimplifiedWSL support:
+- Full syntax highlighting for `.swsl` files
+- SimplifiedWSL-specific snippets (feature, solution, workflow types)
+- Hierarchical execution examples
+- Comprehensive documentation for SimplifiedWSL and hierarchical workflows
+- Support for workflow types: feature, solution, workflow, custom
 
 ### 1.0.0
 
