@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.kuetix"
-version = "2023.3.0"
+version = "1.4.0"
 
 repositories {
     mavenCentral()
@@ -31,8 +31,8 @@ kotlin {
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "233"
-            untilBuild = "252.*"
+            sinceBuild = "252"
+            untilBuild = "253.*"
         }
     }
     
