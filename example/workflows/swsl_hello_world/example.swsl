@@ -1,0 +1,13 @@
+module example
+
+workflow hello_world
+
+const {
+    event: "greet",
+    message: "Hello, World from SimplifiedWSL!",
+    version: "1.0.0"
+}
+
+// Simple greeting workflow using SimplifiedWSL syntax
+converse/speak.Say(on: "message", response: $constants.message, statusCode: 200) ->
+services/common.Response(message: "Greeting sent successfully", status: "ok") -> .

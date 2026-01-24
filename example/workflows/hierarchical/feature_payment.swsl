@@ -1,0 +1,19 @@
+module payment_processing
+
+feature payment_feature
+
+const {
+    timeout: 5000,
+    retryCount: 3
+}
+
+def errors.LogError(level: "error") as errorHandler -> .
+
+// Validate payment
+workflow:validate_payment(timeout: $constants.timeout) <- errorHandler ->
+
+// Process payment
+workflow:process_payment(retries: $constants.retryCount) <- errorHandler ->
+
+// Send receipt
+payment.SendReceipt() <- errorHandler -> .

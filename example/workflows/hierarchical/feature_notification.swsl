@@ -1,0 +1,16 @@
+module notification_processing
+
+feature notification_feature
+
+const {
+    channels: ["email", "sms"],
+    priority: "high"
+}
+
+def errors.LogError(level: "warning") as errorHandler -> .
+
+// Send notification via workflow
+workflow:notify_customer(channels: $constants.channels, priority: $constants.priority) <- errorHandler ->
+
+// Log notification
+logger.Info(message: "Notification sent") -> .
