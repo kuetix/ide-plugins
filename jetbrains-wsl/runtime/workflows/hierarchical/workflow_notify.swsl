@@ -1,0 +1,12 @@
+module notify_user
+
+workflow
+
+const {
+    template: "payment_confirmation"
+}
+
+def errors.OnAnyError() as errorHandler -> .
+
+// Send notification
+notification.Send(template: $constants.template) <- errorHandler -> .

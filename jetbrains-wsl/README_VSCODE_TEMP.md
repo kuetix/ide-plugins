@@ -1,22 +1,25 @@
-# WSL Language Support for JetBrains IDEs
+# WSL Language Support for VS Code
 
-This plugin provides comprehensive language support for the **Kuetix Workflow Specific Language (WSL)** and **SimplifiedWSL** in JetBrains IDEs (IntelliJ IDEA, GoLand, WebStorm, etc.).
+This extension provides comprehensive language support for the **Kuetix Workflow Specific Language (WSL)** and **SimplifiedWSL** in Visual Studio Code.
 
 ## Features
 
 ### Syntax Highlighting
 - Full syntax highlighting for WSL and SimplifiedWSL keywords, strings, numbers, comments, and operators
 - Support for both `.wsl` and `.swsl` file extensions
-- Customizable color schemes via IDE settings
+- Customizable color themes
 
 ### Code Completion
 - Keyword completion for all WSL and SimplifiedWSL keywords
-- Dynamic module and method completion from `modules.json` files
-- Smart completion for workflow elements
+- Smart snippets for common patterns (workflow, state, action declarations)
+- SimplifiedWSL-specific snippets (feature, solution, def, action flows)
+- Template insertions with cursor positioning
+- Dynamic module and method completion from `modules.json`
+  - Place a `modules.json` file in your project root to define custom modules
+  - Get intelligent suggestions for module paths and methods
 
 ### Code Navigation
-- Bracket matching for `{}`, `()`, and `[]`
-- Code structure view for workflows
+- Bracket matching for `{}` and `()`
 - Comment toggling with `Ctrl+/` (or `Cmd+/` on macOS)
 - Auto-closing brackets and quotes
 
@@ -26,37 +29,42 @@ This plugin provides comprehensive language support for the **Kuetix Workflow Sp
 
 ## Installation
 
-### From JetBrains Marketplace
-1. Open your JetBrains IDE (IntelliJ IDEA, GoLand, WebStorm, etc.)
-2. Go to **Settings/Preferences** → **Plugins**
+### From VS Code Marketplace
+1. Open Visual Studio Code
+2. Go to **Extensions** (Ctrl+Shift+X or Cmd+Shift+X on macOS)
 3. Search for "WSL Language Support"
 4. Click **Install**
-5. Restart the IDE
 
-### From Plugin File
-1. Download the plugin `.jar` or `.zip` file from the releases
-2. Go to **Settings/Preferences** → **Plugins**
-3. Click the gear icon → **Install Plugin from Disk**
+### From VSIX File
+1. Download the `.vsix` file from the releases
+2. Open Visual Studio Code
+3. Go to **Extensions** → **...** → **Install from VSIX**
 4. Select the downloaded file
-5. Restart the IDE
 
 ## Building from Source
 
 ### Prerequisites
-- JDK 17 or higher
-- Gradle (included via wrapper)
+- Node.js 18 or higher
+- npm or yarn
 
 ### Build Commands
 
 ```bash
-# Navigate to the plugin directory
-cd ide-plugins/jetbrains-wsl
+# Navigate to the extension directory
+cd ide-plugins/vs-code-wsl
 
-# Build the plugin
-./gradlew buildPlugin
+# Install dependencies
+npm install
 
-# The built plugin will be in build/distributions/
+# Compile TypeScript
+npm run compile
+
+# Package the extension
+npm install -g @vscode/vsce
+vsce package
 ```
+
+The built extension will be in the current directory as a `.vsix` file.
 
 ## SimplifiedWSL
 
@@ -112,7 +120,7 @@ payment.SendReceipt() <- errorHandler -> .
 
 - [SimplifiedWSL Guide](./SIMPLIFIED_WSL.md) - Complete syntax reference
 - [Hierarchical Execution](./HIERARCHICAL_EXECUTION.md) - Workflow orchestration patterns
-- [Examples](./runtime/workflows/hierarchical/) - Working examples
+- [Examples](./examples/hierarchical/) - Working examples
 
 ## WSL Language Overview
 
@@ -190,7 +198,7 @@ workflow user_login {
 
 ### Module Definitions
 
-Define custom modules for code completion by creating a `modules.json` file in your project:
+Define custom modules for code completion by creating a `modules.json` file in your project root directory:
 
 ```json
 {
@@ -212,24 +220,55 @@ Define custom modules for code completion by creating a `modules.json` file in y
 }
 ```
 
-The plugin automatically watches for changes to `modules.json` files in:
+The extension automatically watches for changes to `modules.json` files in:
 - Project root: `modules.json`
 - Workflows directory: `workflows/modules.json`
 - Runtime workflows: `runtime/workflows/modules.json`
 
+## Snippets
+
+The extension includes helpful code snippets:
+
+**WSL Snippets:**
+- `module` - Create a module declaration
+- `import` - Import statement
+- `workflow` - Create a complete workflow structure
+- `state` - Create a state with transitions
+- `state-end` - Create a terminal state
+- `action` - Create an action
+- `const` - Create a const block
+- `on-success` - Success transition
+- `on-error` - Error transition
+- `template` - Template expression
+
+**SimplifiedWSL Snippets:**
+- `swsl-feature` - Create a feature template
+- `swsl-solution` - Create a solution template
+- `swsl-workflow` - Create a workflow template
+- `swsl-module` - Module declaration
+- `swsl-const` - Constants block
+- `swsl-def-error` - Define error handler
+- `swsl-def` - Define reusable action
+- `swsl-flow` - Action flow with error handling
+- `swsl-chain` - Chained action flow
+- `swsl-call-workflow` - Call workflow hierarchically
+- `swsl-call-feature` - Call feature hierarchically
+
+Type the prefix and press `Tab` to expand the snippet.
+
 ## Examples
 
-Check the `runtime/workflows/` directory for:
-- `workflow/login.wsl` - A complete user login workflow
+Check the `examples/` directory for:
+- `login.wsl` - A complete user login workflow
 - `hierarchical/` - SimplifiedWSL hierarchical execution examples
   - `solution_example.swsl` - Solution orchestrating features
   - `feature_payment.swsl` - Feature orchestrating workflows
   - `workflow_validate.swsl` - Workflow with actions
+- `modules.json` - Sample module definitions
 
-## Compatibility
+## Requirements
 
-- Compatible with IntelliJ Platform 2023.3 - 2025.2
-- Tested with IntelliJ IDEA, GoLand, WebStorm, PyCharm, and other JetBrains IDEs
+- Visual Studio Code version 1.75.0 or higher
 
 ## Known Issues
 
@@ -241,7 +280,7 @@ Contributions are welcome! Please read the contributing guidelines in the main r
 
 ## License
 
-This plugin is part of the Kuetix Engine project. See the LICENSE file in the repository root for details.
+This extension is part of the Kuetix Engine project. See the LICENSE file in the repository root for details.
 
 ## Support
 
@@ -251,26 +290,23 @@ This plugin is part of the Kuetix Engine project. See the LICENSE file in the re
 
 ## Release Notes
 
-### Version 2024.1.0
+### 1.1.0
 
 Added SimplifiedWSL support:
 - Full syntax highlighting for `.swsl` files
-- Support for SimplifiedWSL workflow types (feature, solution, workflow)
-- SimplifiedWSL operators: `->`, `<-`, `.`
-- SimplifiedWSL `def` keyword for reusable definitions
+- SimplifiedWSL-specific snippets (feature, solution, workflow types)
 - Hierarchical execution examples
 - Comprehensive documentation for SimplifiedWSL and hierarchical workflows
+- Support for workflow types: feature, solution, workflow, custom
 
-### Version 2023.3.0
+### 1.0.0
 
-Initial release of WSL Language Support plugin:
+Initial release of WSL Language Support for VS Code
+
 - Full syntax highlighting for WSL files
-- Keyword completion for workflow elements
+- Keyword completion with smart snippets
 - Dynamic module and method completion from modules.json files
 - Multi-source module loading (project root, workflows/, runtime/workflows/)
 - Auto-reload modules on file changes
-- Robust error handling - skip invalid modules gracefully
-- Code structure view for workflows and states
-- Brace matching and code commenting support
-- Customizable color scheme
-- Compatible with IntelliJ Platform 2023.3 - 2025.2
+- Bracket matching and comment support
+- Custom file icon for .wsl files
