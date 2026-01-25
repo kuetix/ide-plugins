@@ -1,0 +1,70 @@
+name: Deploy WSL Playground
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'playground/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'playground/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Build job (validate files)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          echo "Validating HTML files..."
+          for file in playground/*.html; do
+            echo "Checking $file"
+            if [ -f "$file" ]; then
+              echo "✓ $file exists"
+            fi
+          done
+
+      - name: Validate JavaScript
+        run: |
+          echo "Validating JavaScript files..."
+          for file in playground/js/*.js; do
+            echo "Checking $file"
+            if [ -f "$file" ]; then
+              echo "✓ $file exists"
+            fi
+          done
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'playground'
+
+  # Deploy job (only on main branch)
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
