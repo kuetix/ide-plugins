@@ -1,0 +1,42 @@
+module example.nested
+
+import services/common
+
+const {
+    event: "test",
+    description: "Test nested array and object support",
+    version: "1.0.0"
+}
+
+workflow test_nested_structures {
+  start: TestNestedArrays
+
+  state TestNestedArrays {
+    // Test nested array and object literals
+    action converse/speak.Say(
+      on: message, 
+      v: [
+        {
+          response: [
+            {
+              event: $constants.event,
+              code: "Code202"
+            }
+          ],
+          statusCode: 202
+        }
+      ]
+    ) as ResponseAsValue
+    on success -> AccessNestedValues(ResponseAsValue)
+  }
+
+  state AccessNestedValues(ResponseAsValue) {
+    // Test accessing nested values with array indexing
+    action services/common/response.ResponseValue(
+      message: $ResponseAsValue.message[0].response[0].event,
+      statusCode: $ResponseAsValue.message[0].statusCode|int,
+      code: $ResponseAsValue.message[0].response[0].code
+    )
+    end ok
+  }
+}
