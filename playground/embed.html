@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSL Playground - Embedded</title>
+    <link rel="stylesheet" href="css/playground.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css">
+    <style>
+        /* Embedded-specific styles */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .playground-container {
+            height: 100vh;
+        }
+        
+        /* Minimal header for embedded version */
+        .playground-header {
+            padding: 8px 12px;
+            font-size: 12px;
+        }
+        
+        .playground-header h1 {
+            font-size: 14px;
+        }
+        
+        .subtitle {
+            display: none;
+        }
+        
+        /* Hide footer in embedded mode */
+        .playground-footer {
+            display: none;
+        }
+        
+        /* Adjust panels for embedded view */
+        .panel-header {
+            padding: 6px 12px;
+        }
+        
+        .panel-title {
+            font-size: 11px;
+        }
+        
+        /* Compact button sizes */
+        .btn, .btn-icon {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="playground-container">
+        <!-- Compact Header -->
+        <header class="playground-header">
+            <div class="header-left">
+                <h1>WSL Playground</h1>
+            </div>
+            <div class="header-right">
+                <select id="language-selector" class="language-selector">
+                    <option value="wsl">WSL</option>
+                    <option value="swsl" selected>SWSL</option>
+                </select>
+                <select id="example-selector" class="example-selector">
+                    <option value="">Examples</option>
+                    <option value="hello_world">Hello World</option>
+                    <option value="payment_feature">Payment Feature</option>
+                    <option value="action_chain">Action Chain</option>
+                </select>
+                <button id="theme-toggle" class="btn btn-secondary" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="playground-content">
+            <!-- Editor Panel -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title">CODE EDITOR</span>
+                    <div class="panel-actions">
+                        <button id="clear-btn" class="btn-icon" title="Clear">🗑️</button>
+                    </div>
+                </div>
+                <div id="editor" class="editor"></div>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="output-panel">
+                <div class="panel-header">
+                    <span class="panel-title">SYNTAX GUIDE</span>
+                    <button id="clear-output-btn" class="btn-icon" title="Clear">🗑️</button>
+                </div>
+                <div class="output-content">
+                    <div id="output" class="output">
+                        <div class="welcome-message">
+                            <p><strong>SimplifiedWSL Quick Reference:</strong></p>
+                            <ul>
+                                <li><code>-></code> Forward flow</li>
+                                <li><code>&lt;-</code> Error handler</li>
+                                <li><code>.</code> Terminal</li>
+                            </ul>
+                            <pre><code>module example
+workflow demo
+
+action.First() ->
+action.Second() -> .</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script src="js/examples.js"></script>
+    <script src="js/wsl-language.js"></script>
+    <script src="js/playground.js"></script>
+    
+    <script>
+        // Notify parent window when ready (for embedding)
+        window.addEventListener('load', () => {
+            if (window.parent !== window) {
+                window.parent.postMessage({ type: 'ready' }, '*');
+            }
+        });
+    </script>
+</body>
+</html>

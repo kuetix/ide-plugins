@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSL Playground - Interactive Editor</title>
+    <link rel="stylesheet" href="css/playground.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css">
+</head>
+<body>
+    <div class="playground-container">
+        <!-- Header -->
+        <header class="playground-header">
+            <div class="header-left">
+                <h1>WSL Playground</h1>
+                <span class="subtitle">Interactive Workflow Specific Language Editor</span>
+            </div>
+            <div class="header-right">
+                <select id="language-selector" class="language-selector">
+                    <option value="wsl">WSL</option>
+                    <option value="swsl" selected>SimplifiedWSL</option>
+                </select>
+                <select id="example-selector" class="example-selector">
+                    <option value="">-- Select Example --</option>
+                    <option value="hello_world">Hello World (SWSL)</option>
+                    <option value="payment_feature">Payment Feature (SWSL)</option>
+                    <option value="solution_example">Solution Example (SWSL)</option>
+                    <option value="login_workflow">Login Workflow (WSL)</option>
+                </select>
+                <button id="theme-toggle" class="btn btn-secondary" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button id="share-btn" class="btn btn-secondary" title="Share">
+                    <span>🔗 Share</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="playground-content">
+            <!-- Editor Panel -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span class="panel-title">Editor</span>
+                    <div class="panel-actions">
+                        <button id="format-btn" class="btn-icon" title="Format Code">
+                            <span>✨</span>
+                        </button>
+                        <button id="clear-btn" class="btn-icon" title="Clear Editor">
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="editor" class="editor"></div>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="output-panel">
+                <div class="panel-header">
+                    <span class="panel-title">Output & Syntax Guide</span>
+                    <button id="clear-output-btn" class="btn-icon" title="Clear Output">
+                        <span>🗑️</span>
+                    </button>
+                </div>
+                <div class="output-content">
+                    <div id="output" class="output">
+                        <div class="welcome-message">
+                            <h3>Welcome to WSL Playground! 🎉</h3>
+                            <p>This is an interactive editor for the Workflow Specific Language (WSL) and SimplifiedWSL (SWSL).</p>
+                            
+                            <h4>Quick Start:</h4>
+                            <ul>
+                                <li>Select an example from the dropdown above</li>
+                                <li>Edit the code in the editor</li>
+                                <li>See syntax validation in real-time</li>
+                                <li>Share your code using the Share button</li>
+                            </ul>
+
+                            <h4>SimplifiedWSL Syntax:</h4>
+                            <pre><code>module example
+
+workflow hello_world
+
+const {
+    message: "Hello, World!"
+}
+
+// Simple action flow
+action.Call() -> 
+action.Process() -> .
+</code></pre>
+
+                            <h4>Key Operators:</h4>
+                            <ul>
+                                <li><code>-></code> Forward flow (sequential execution)</li>
+                                <li><code>&lt;-</code> Error binding (error handling)</li>
+                                <li><code>.</code> Terminal operator (end workflow)</li>
+                            </ul>
+
+                            <h4>Workflow Types:</h4>
+                            <ul>
+                                <li><code>workflow</code> - Basic workflow</li>
+                                <li><code>feature</code> - Feature-level workflow</li>
+                                <li><code>solution</code> - Solution-level orchestration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="playground-footer">
+            <div class="footer-content">
+                <span>Powered by <a href="https://github.com/kuetix/ide-plugins" target="_blank">Kuetix WSL</a></span>
+                <span>•</span>
+                <a href="https://github.com/kuetix/ide-plugins" target="_blank">Documentation</a>
+                <span>•</span>
+                <a href="https://github.com/kuetix/ide-plugins" target="_blank">GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script src="js/examples.js"></script>
+    <script src="js/wsl-language.js"></script>
+    <script src="js/playground.js"></script>
+</body>
+</html>

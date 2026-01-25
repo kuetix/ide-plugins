@@ -1,0 +1,32 @@
+{
+  "name": "wsl-playground",
+  "version": "1.0.0",
+  "description": "Interactive web-based playground for Workflow Specific Language (WSL) and SimplifiedWSL",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --listen 8000",
+    "build": "echo 'No build step required - pure static files'",
+    "deploy": "echo 'Deploy playground directory to your hosting service'"
+  },
+  "keywords": [
+    "wsl",
+    "swsl",
+    "workflow",
+    "playground",
+    "editor",
+    "monaco",
+    "kuetix",
+    "embedded",
+    "iframe"
+  ],
+  "author": "Kuetix",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuetix/ide-plugins"
+  },
+  "homepage": "https://github.com/kuetix/ide-plugins/tree/main/playground",
+  "devDependencies": {},
+  "dependencies": {}
+}
