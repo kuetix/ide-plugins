@@ -1,0 +1,58 @@
+plugins {
+    id("java")
+    id("org.jetbrains.kotlin.jvm") version "2.2.20"
+    id("org.jetbrains.intellij.platform") version "2.13.1"
+}
+
+group = "com.kuetix"
+version = "1.4.1"
+
+val intellijPlatformVersion: String by project
+val pluginSinceBuild: String by project
+val pluginUntilBuild: String by project
+
+repositories {
+    mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
+}
+
+dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity(intellijPlatformVersion)
+        pluginVerifier()
+    }
+    // Use compileOnly instead of implementation to avoid repackaging
+    // IntelliJ Platform already bundles GSON
+    compileOnly("com.google.code.gson:gson:2.10.1")
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = pluginSinceBuild
+            untilBuild = pluginUntilBuild
+        }
+    }
+    
+    signing {
+        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
+        privateKey = providers.environmentVariable("PRIVATE_KEY")
+        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
+    }
+    
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
+    }
+}

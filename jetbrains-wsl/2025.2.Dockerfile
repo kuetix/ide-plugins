@@ -11,18 +11,17 @@
 #     docker run --rm -v "$(pwd)/output:/output" jetbrains-wsl-plugin-new-api \
 #       cp -r /app/build/distributions/. /output
 
-FROM eclipse-temurin:17-jdk AS builder
+FROM eclipse-temurin:21-jdk AS builder
 
 # Install required tools
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends unzip wget && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends unzip wget
 
 # Set working directory
 WORKDIR /app
 
 # Copy Gradle wrapper files first for layer caching
-COPY gradle/ gradle/
+COPY 2025.2.gradle/ gradle/
 COPY gradlew ./
 
 # Make gradlew executable
@@ -32,7 +31,10 @@ RUN chmod +x gradlew
 RUN ./gradlew --version
 
 # Copy the rest of the project sources
-COPY build.gradle.kts settings.gradle.kts gradle.properties ./
+COPY 2025.2.build.gradle.kts settings.gradle.kts 2025.2.gradle.properties ./
+RUN mv 2025.2.build.gradle.kts build.gradle.kts && \
+    mv 2025.2.gradle.properties gradle.properties
+
 COPY src/ src/
 
 # Build the plugin targeting the new API (IntelliJ Platform 2025.2+)
