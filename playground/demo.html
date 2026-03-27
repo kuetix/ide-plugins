@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSL Playground - Embedding Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292f;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: #667eea;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #57606a;
+            margin-bottom: 24px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .feature {
+            padding: 16px;
+            background: #f6f8fa;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #24292f;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: #57606a;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .demo-section h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #24292f;
+        }
+
+        .demo-section p {
+            color: #57606a;
+            margin-bottom: 20px;
+        }
+
+        .playground-embed {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #d0d7de;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block {
+            background: #0d1117;
+            color: #e6edf3;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
+
+        .code-block code {
+            color: #a5d6ff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #667eea;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6e7781;
+        }
+
+        .btn-secondary:hover {
+            background: #57606a;
+        }
+
+        .control-panel {
+            background: #f6f8fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .control-panel h3 {
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .control-group {
+            margin-bottom: 12px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .control-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            resize: vertical;
+        }
+
+        .info-box {
+            background: #dff6ff;
+            border-left: 3px solid #0969da;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .info-box strong {
+            color: #0969da;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .hero {
+                padding: 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .playground-embed {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>🎮 WSL Playground</h1>
+            <p class="subtitle">Interactive web-based editor for Workflow Specific Language (WSL) and SimplifiedWSL</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <h3>🎨 Syntax Highlighting</h3>
+                    <p>Full syntax highlighting powered by Monaco Editor</p>
+                </div>
+                <div class="feature">
+                    <h3>🔗 Shareable</h3>
+                    <p>Share your code via URL with anyone</p>
+                </div>
+                <div class="feature">
+                    <h3>📱 Responsive</h3>
+                    <p>Works on desktop, tablet, and mobile</p>
+                </div>
+                <div class="feature">
+                    <h3>🚀 Embeddable</h3>
+                    <p>Easy to embed in any website</p>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <a href="index.html" class="btn" target="_blank">Open Full Playground</a>
+                <a href="embed.html" class="btn btn-secondary" target="_blank">Open Embedded Version</a>
+                <a href="README.md" class="btn btn-secondary">Documentation</a>
+            </div>
+        </div>
+
+        <!-- Live Demo -->
+        <div class="demo-section">
+            <h2>📺 Live Demo</h2>
+            <p>Try the playground below. Select examples, edit code, and see real-time syntax highlighting!</p>
+            
+            <iframe 
+                id="playground-iframe"
+                src="embed.html"
+                class="playground-embed"
+                frameborder="0"
+            ></iframe>
+        </div>
+
+        <!-- Interactive Controls -->
+        <div class="demo-section">
+            <h2>🎮 Interactive Demo</h2>
+            <p>Use the controls below to interact with the embedded playground via JavaScript:</p>
+            
+            <div class="control-panel">
+                <h3>Send Code to Playground</h3>
+                <div class="control-group">
+                    <label>Code:</label>
+                    <textarea id="code-input" rows="5">module example
+
+workflow demo
+
+action.First() ->
+action.Second() -> .</textarea>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="sendCode()">Send Code</button>
+                    <button class="btn btn-secondary" onclick="getCode()">Get Code</button>
+                    <button class="btn btn-secondary" onclick="toggleTheme()">Toggle Theme</button>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 Tip:</strong> Open your browser console to see the code received from the playground!
+            </div>
+        </div>
+
+        <!-- Embedding Instructions -->
+        <div class="demo-section">
+            <h2>📋 How to Embed</h2>
+            <p>Copy and paste this code into your website:</p>
+            
+            <h3 style="margin-top: 20px; font-size: 18px;">Basic Embed:</h3>
+            <div class="code-block"><code>&lt;iframe 
+    src="https://your-domain.com/playground/embed.html"
+    width="100%"
+    height="600"
+    frameborder="0"
+    style="border: 1px solid #ddd; border-radius: 8px;"
+&gt;&lt;/iframe&gt;</code></div>
+
+            <h3 style="margin-top: 20px; font-size: 18px;">Responsive Embed:</h3>
+            <div class="code-block"><code>&lt;div style="position: relative; padding-bottom: 56.25%; height: 0;"&gt;
+    &lt;iframe 
+        src="https://your-domain.com/playground/embed.html"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        frameborder="0"
+    &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></div>
+
+            <h3 style="margin-top: 20px; font-size: 18px;">JavaScript API:</h3>
+            <div class="code-block"><code>// Send code to playground
+iframe.contentWindow.postMessage({
+    type: 'setCode',
+    data: {
+        code: 'module example\\n\\nworkflow demo\\n\\naction.Call() -> .',
+        language: 'swsl'
+    }
+}, '*');
+
+// Get code from playground
+iframe.contentWindow.postMessage({ type: 'getCode' }, '*');
+
+// Listen for code
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'code') {
+        console.log('Code:', event.data.data.code);
+    }
+});</code></div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="demo-section">
+            <h2>🎯 Use Cases</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>📚 Documentation Sites</h3>
+                    <p>Embed live examples in your documentation</p>
+                </div>
+                <div class="feature">
+                    <h3>🎓 Educational Platforms</h3>
+                    <p>Create interactive tutorials and courses</p>
+                </div>
+                <div class="feature">
+                    <h3>💼 Product Demos</h3>
+                    <p>Show off your workflow language features</p>
+                </div>
+                <div class="feature">
+                    <h3>🔬 Testing & Prototyping</h3>
+                    <p>Quick prototyping and testing workflows</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Powered by <a href="https://github.com/kuetix/ide-plugins" target="_blank">Kuetix WSL</a> • 
+        <a href="https://github.com/kuetix/ide-plugins" target="_blank">GitHub</a> • 
+        <a href="README.md">Documentation</a></p>
+    </footer>
+
+    <script>
+        const iframe = document.getElementById('playground-iframe');
+        let isThemeDark = false;
+
+        // Wait for iframe to load
+        iframe.addEventListener('load', () => {
+            console.log('Playground loaded!');
+        });
+
+        // Send code to playground
+        function sendCode() {
+            const code = document.getElementById('code-input').value;
+            iframe.contentWindow.postMessage({
+                type: 'setCode',
+                data: {
+                    code: code,
+                    language: 'swsl'
+                }
+            }, '*');
+            console.log('Code sent to playground');
+        }
+
+        // Get code from playground
+        function getCode() {
+            iframe.contentWindow.postMessage({
+                type: 'getCode'
+            }, '*');
+            console.log('Requested code from playground');
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            isThemeDark = !isThemeDark;
+            iframe.contentWindow.postMessage({
+                type: 'setTheme',
+                data: { theme: isThemeDark ? 'dark' : 'light' }
+            }, '*');
+            console.log('Theme toggled to:', isThemeDark ? 'dark' : 'light');
+        }
+
+        // Listen for messages from playground
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'ready') {
+                console.log('✅ Playground is ready!');
+            } else if (event.data.type === 'code') {
+                console.log('📝 Code received from playground:');
+                console.log('Language:', event.data.data.language);
+                console.log('Code:', event.data.data.code);
+                alert('Code received! Check console for details.');
+            }
+        });
+    </script>
+</body>
+</html>
