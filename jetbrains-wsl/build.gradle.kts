@@ -5,7 +5,11 @@ plugins {
 }
 
 group = "com.kuetix"
-version = "1.4.0"
+version = "1.4.1"
+
+val intellijPlatformVersion: String by project
+val pluginSinceBuild: String by project
+val pluginUntilBuild: String by project
 
 repositories {
     mavenCentral()
@@ -16,7 +20,7 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2023.3")
+        intellijIdeaCommunity(intellijPlatformVersion)
         pluginVerifier()
     }
     // Use compileOnly instead of implementation to avoid repackaging
@@ -31,8 +35,8 @@ kotlin {
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "252"
-            untilBuild = "253.*"
+            sinceBuild = pluginSinceBuild
+            untilBuild = pluginUntilBuild
         }
     }
     

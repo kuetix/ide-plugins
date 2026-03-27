@@ -1,14 +1,14 @@
 # Dockerfile to build the WSL Language Support JetBrains plugin
-# Targets the LEGACY API: IntelliJ Platform 2023.3 – 2025.1 (builds 233 – 251.*)
-# For JetBrains 2025.2+ (new API), use Dockerfile.new-api instead.
+# Targets the NEW API: IntelliJ Platform 2025.2 and later (builds 252+)
+# For older JetBrains versions (pre-2025.2), use Dockerfile instead.
 #
 # Usage:
 #   Build the image and export the plugin ZIP to ./output:
-#     docker build --output=./output --target=export .
+#     docker build -f Dockerfile.new-api --output=./output --target=export .
 #
 #   Or just build the builder stage and inspect it interactively:
-#     docker build --target=builder -t jetbrains-wsl-plugin .
-#     docker run --rm -v "$(pwd)/output:/output" jetbrains-wsl-plugin \
+#     docker build -f Dockerfile.new-api --target=builder -t jetbrains-wsl-plugin-new-api .
+#     docker run --rm -v "$(pwd)/output:/output" jetbrains-wsl-plugin-new-api \
 #       cp -r /app/build/distributions/. /output
 
 FROM eclipse-temurin:17-jdk AS builder
@@ -35,8 +35,12 @@ RUN ./gradlew --version
 COPY build.gradle.kts settings.gradle.kts gradle.properties ./
 COPY src/ src/
 
-# Build the plugin (produces build/distributions/*.zip)
-RUN ./gradlew buildPlugin --no-daemon --stacktrace
+# Build the plugin targeting the new API (IntelliJ Platform 2025.2+)
+# Override the gradle.properties defaults to target build 252 and later
+RUN ./gradlew buildPlugin --no-daemon --stacktrace \
+    -PintellijPlatformVersion=2025.2 \
+    -PpluginSinceBuild=252 \
+    -PpluginUntilBuild=
 
 # ── Export stage ──────────────────────────────────────────────────────────────
 FROM scratch AS export
