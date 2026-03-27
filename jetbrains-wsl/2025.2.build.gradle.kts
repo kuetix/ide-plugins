@@ -1,7 +1,7 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.21"
-    id("org.jetbrains.intellij.platform") version "2.2.1"
+    id("org.jetbrains.kotlin.jvm") version "2.2.20"
+    id("org.jetbrains.intellij.platform") version "2.13.1"
 }
 
 group = "com.kuetix"
@@ -28,8 +28,14 @@ dependencies {
     compileOnly("com.google.code.gson:gson:2.10.1")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 intellijPlatform {

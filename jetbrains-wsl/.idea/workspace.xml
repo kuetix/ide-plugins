@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f9779c8-efec-427e-aab8-c5b576b5feb8" name="Changes" comment="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs">
-      <change afterPath="$PROJECT_DIR$/RELEASE_NOTES_v1.0.0.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2025-docker-build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2025.2.build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2025.2.gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2025.2.gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2025.2.gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile.new-api" beforeDir="false" afterPath="$PROJECT_DIR$/2025.2.Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="master" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -43,6 +48,10 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -63,7 +72,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "copilot/add-dockerfile-for-jetbrains-api-2025-2",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/anare/Projects/kuetix/ide-plugins/jetbrains-wsl",
@@ -103,19 +112,17 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="jetbrains-wsl" />
-      <option name="filePath" />
-      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Gradle.Run IDE with Plugin" />
@@ -159,7 +166,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs" />
+    <MESSAGE value="trying to update for new api" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying to update for new api" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

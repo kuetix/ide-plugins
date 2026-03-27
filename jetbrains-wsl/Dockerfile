@@ -1,4 +1,6 @@
 # Dockerfile to build the WSL Language Support JetBrains plugin
+# Targets the LEGACY API: IntelliJ Platform 2023.3 – 2025.1 (builds 233 – 251.*)
+# For JetBrains 2025.2+ (new API), use Dockerfile.new-api instead.
 #
 # Usage:
 #   Build the image and export the plugin ZIP to ./output:
