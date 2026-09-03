@@ -1,0 +1,71 @@
+module test_attributes
+
+import services/common
+
+const {
+    enabled: true,
+    threshold: 10
+}
+
+workflow attribute_test {
+  start: ConditionalState
+
+  state ConditionalState {
+    if $constants.enabled == true
+    else -> SuccessState
+    action services/common/response.ResponseValue(message: "Conditional execution") as Result
+    on success -> SuccessState
+    on error -> ErrorState
+  }
+
+  state ContinueOnFailState {
+    continue on fail
+    action services/common/test.MayFail() as TestResult
+    on success -> NextState
+    on error -> ErrorState
+  }
+
+  state SkipToState {
+    skip to
+    action services/common/process.Execute() as ProcessResult
+    on success -> FinalState
+  }
+
+  state CombinedAttributesState {
+    if $Result.valid == true
+    continue on fail
+    action services/common/combined.Process(data: $Result) as Combined
+    on success when $Combined.score > $constants.threshold -> HighScorePath
+    on success -> DefaultPath
+  }
+
+  state HighScorePath {
+    action services/common/response.ResponseValue(message: "High score achieved")
+    end ok
+  }
+
+  state DefaultPath {
+    action services/common/response.ResponseValue(message: "Default path")
+    end ok
+  }
+
+  state SuccessState {
+    action services/common/response.ResponseValue(message: "Success")
+    end ok
+  }
+
+  state NextState {
+    action services/common/response.ResponseValue(message: "Next state")
+    end ok
+  }
+
+  state ErrorState {
+    action services/common/response.ResponseValue(message: "Error occurred")
+    end fail
+  }
+
+  state FinalState {
+    action services/common/response.ResponseValue(message: "Final")
+    end ok
+  }
+}
