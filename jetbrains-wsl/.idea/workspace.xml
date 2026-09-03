@@ -4,19 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f9779c8-efec-427e-aab8-c5b576b5feb8" name="Changes" comment="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs">
-      <change afterPath="$PROJECT_DIR$/2025-docker-build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2025.2.build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2025.2.gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2025.2.gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2025.2.gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    <list default="true" id="8f9779c8-efec-427e-aab8-c5b576b5feb8" name="Changes" comment="Add support for new Jetbrains API and update Dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile.new-api" beforeDir="false" afterPath="$PROJECT_DIR$/2025.2.Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/anare/Projects/kuetix/ide-plugins/jetbrains-wsl" value="36RnfwSxtT4NH7rJx0WtCpM8Qf9" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="chat-panel" value="Claude Sonnet 4.5" />
+      <entry key="agent-panel" value="Claude Sonnet 4.5" />
+    </selectedModels>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="100" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -63,31 +72,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Run IDE with Plugin.executor": "Run",
-    "Gradle.jetbrains-wsl [buildPlugin].executor": "Debug",
-    "Gradle.jetbrains-wsl [build].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "copilot/add-dockerfile-for-jetbrains-api-2025-2",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/anare/Projects/kuetix/ide-plugins/jetbrains-wsl",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Run IDE with Plugin.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.jetbrains-wsl [buildPlugin].executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.jetbrains-wsl [build].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;copilot/add-dockerfile-for-jetbrains-api-2025-2&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/anare/Projects/kuetix/ide-plugins/jetbrains-wsl&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -148,6 +161,8 @@
       <workItem from="1764978387904" duration="2027000" />
       <workItem from="1764980435306" duration="167000" />
       <workItem from="1764980934078" duration="5452000" />
+      <workItem from="1774589237548" duration="196000" />
+      <workItem from="1775159812109" duration="443000" />
     </task>
     <task id="LOCAL-00001" summary="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs">
       <option name="closed" value="true" />
@@ -157,17 +172,37 @@
       <option name="project" value="LOCAL" />
       <updated>1764991860848</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add support for new Jetbrains API and update Dockerfile">
+      <option name="closed" value="true" />
+      <created>1774589175146</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774589175146</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Add the initial implementation of the WSL Language Support plugin with core features for JetBrains IDEs" />
     <MESSAGE value="trying to update for new api" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying to update for new api" />
+    <MESSAGE value="Add support for new Jetbrains API and update Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add support for new Jetbrains API and update Dockerfile" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
