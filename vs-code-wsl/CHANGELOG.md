@@ -2,6 +2,24 @@
 
 All notable changes to the WSL Language Support extension will be documented in this file.
 
+## [1.3.0] - 2026
+
+### Added
+- Syntax highlighting and keyword completion for the expression / control-flow
+  constructs added to the engine:
+  - `let <name> = <expr>` bindings
+  - `if <expr>`, and `on success when <expr>` guards (ordered, first match wins)
+  - `foreach <x> in <expr> [parallel[limit: K]] { action ... }`
+  - `while[max: N] <expr> { action ... }`
+  - `retry[max: N, delay: "...", on: "<expr>"]`
+- Highlighting for expression operators (`== != <= >= && || ! ?? + - * / %`) and
+  `${...}` string interpolation.
+- Highlighting for previously-missing keywords: `if`, `when`, `continue`, `skip`,
+  `parallel`, `wait`, `join`, `branch`, `null`, builtin functions (`len`,
+  `contains`, `int`, …).
+- Snippets: `let`, `if`, `on-success-when`, `foreach`, `foreach-parallel`,
+  `while`, `retry`.
+
 ## [1.0.0] - 2024
 
 ### Added

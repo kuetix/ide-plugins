@@ -97,20 +97,19 @@ class WslLexer : LexerBase() {
             return WslTokenTypes.BLOCK_COMMENT
         }
 
-        // Arrow: ->
-        if (peekString(2) == "->") {
-            consumeChars(2)
-            return WslTokenTypes.ARROW
-        }
-
-        // Template markers: << and >>
-        if (peekString(2) == "<<") {
-            consumeChars(2)
-            return WslTokenTypes.TEMPLATE_START
-        }
-        if (peekString(2) == ">>") {
-            consumeChars(2)
-            return WslTokenTypes.TEMPLATE_END
+        // Two-char arrows / template markers (checked before single '<' '>')
+        when (peekString(2)) {
+            "->" -> { consumeChars(2); return WslTokenTypes.ARROW }
+            "<-" -> { consumeChars(2); return WslTokenTypes.LEFT_ARROW }
+            "<<" -> { consumeChars(2); return WslTokenTypes.TEMPLATE_START }
+            ">>" -> { consumeChars(2); return WslTokenTypes.TEMPLATE_END }
+            "==" -> { consumeChars(2); return WslTokenTypes.EQ_EQ }
+            "!=" -> { consumeChars(2); return WslTokenTypes.NEQ }
+            ">=" -> { consumeChars(2); return WslTokenTypes.GTE }
+            "<=" -> { consumeChars(2); return WslTokenTypes.LTE }
+            "&&" -> { consumeChars(2); return WslTokenTypes.AND_AND }
+            "||" -> { consumeChars(2); return WslTokenTypes.OR_OR }
+            "??" -> { consumeChars(2); return WslTokenTypes.COALESCE }
         }
 
         // Single character tokens
@@ -119,6 +118,8 @@ class WslLexer : LexerBase() {
             '}' -> { consumeChars(); return WslTokenTypes.RBRACE }
             '(' -> { consumeChars(); return WslTokenTypes.LPAREN }
             ')' -> { consumeChars(); return WslTokenTypes.RPAREN }
+            '[' -> { consumeChars(); return WslTokenTypes.LBRACKET }
+            ']' -> { consumeChars(); return WslTokenTypes.RBRACKET }
             ':' -> { consumeChars(); return WslTokenTypes.COLON }
             ',' -> { consumeChars(); return WslTokenTypes.COMMA }
             '.' -> { consumeChars(); return WslTokenTypes.DOT }
@@ -126,6 +127,12 @@ class WslLexer : LexerBase() {
             '|' -> { consumeChars(); return WslTokenTypes.PIPE }
             '$' -> { consumeChars(); return WslTokenTypes.DOLLAR }
             '/' -> { consumeChars(); return WslTokenTypes.SLASH }
+            '<' -> { consumeChars(); return WslTokenTypes.LT }
+            '>' -> { consumeChars(); return WslTokenTypes.GT }
+            '!' -> { consumeChars(); return WslTokenTypes.BANG }
+            '+' -> { consumeChars(); return WslTokenTypes.PLUS }
+            '*' -> { consumeChars(); return WslTokenTypes.STAR }
+            '%' -> { consumeChars(); return WslTokenTypes.PERCENT }
         }
 
         // String literal

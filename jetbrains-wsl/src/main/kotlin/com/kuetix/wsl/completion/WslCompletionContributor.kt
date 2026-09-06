@@ -304,12 +304,20 @@ class WslCompletionProvider : CompletionProvider<CompletionParameters>() {
         private val STATE_KEYWORDS = mapOf(
             "state" to "State declaration",
             "action" to "Action statement",
-            "as" to "Alias"
+            "as" to "Alias",
+            "if" to "Pre-condition guard: if <expr>",
+            "let" to "Bind a value: let <name> = <expr>",
+            "retry" to "retry[max: N, delay: \"200ms\", on: \"<expr>\"]",
+            "foreach" to "foreach <x> in <expr> [parallel[limit: K]] { action ... }",
+            "while" to "while[max: N] <expr> { action ... }",
+            "continue on fail" to "Proceed even if the action errors",
+            "skip to" to "Skip this state under certain conditions"
         )
-        
+
         private val TRANSITION_KEYWORDS = mapOf(
             "on" to "Transition condition",
             "success" to "Success outcome",
+            "when" to "Guard: on success when <expr> -> Next",
             "error" to "Error outcome",
             "end" to "Terminal state",
             "ok" to "OK status",

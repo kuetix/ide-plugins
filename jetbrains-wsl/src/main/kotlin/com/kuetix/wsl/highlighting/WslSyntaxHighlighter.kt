@@ -32,70 +32,24 @@ class WslSyntaxHighlighter : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer = WslLexer()
     
     override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {
-        return when (tokenType) {
-            // Keywords
-            WslTokenTypes.MODULE,
-            WslTokenTypes.IMPORT,
-            WslTokenTypes.AS,
-            WslTokenTypes.CONTEXT,
-            WslTokenTypes.WORKFLOW,
-            WslTokenTypes.START,
-            WslTokenTypes.STATE,
-            WslTokenTypes.ACTION,
-            WslTokenTypes.ON,
-            WslTokenTypes.END,
-            WslTokenTypes.FAIL,
-            WslTokenTypes.OK,
-            WslTokenTypes.CONST,
-            WslTokenTypes.EXTENDS,
-            WslTokenTypes.SUCCESS,
-            WslTokenTypes.ERROR,
-            WslTokenTypes.ELSE,
-            WslTokenTypes.TRUE,
-            WslTokenTypes.FALSE -> KEYWORD_KEYS
-            
-            // Comments
-            WslTokenTypes.LINE_COMMENT,
-            WslTokenTypes.BLOCK_COMMENT -> COMMENT_KEYS
-            
-            // Strings
-            WslTokenTypes.STRING -> STRING_KEYS
-            
-            // Numbers
-            WslTokenTypes.NUMBER -> NUMBER_KEYS
-            
-            // Identifiers
-            WslTokenTypes.IDENTIFIER -> IDENTIFIER_KEYS
-            
-            // Operators
-            WslTokenTypes.ARROW -> OPERATOR_KEYS
-            WslTokenTypes.PIPE -> OPERATOR_KEYS
-            WslTokenTypes.EQUAL -> OPERATOR_KEYS
-            
-            // Braces
-            WslTokenTypes.LBRACE,
-            WslTokenTypes.RBRACE -> BRACES_KEYS
-            
-            // Parentheses
-            WslTokenTypes.LPAREN,
-            WslTokenTypes.RPAREN -> PARENTHESES_KEYS
-            
-            // Dollar sign for references
-            WslTokenTypes.DOLLAR -> REFERENCE_KEYS
-            
-            // Template markers
-            WslTokenTypes.TEMPLATE_START,
-            WslTokenTypes.TEMPLATE_END -> TEMPLATE_KEYS
-            
-            // Punctuation
-            WslTokenTypes.COLON,
-            WslTokenTypes.COMMA,
-            WslTokenTypes.DOT,
-            WslTokenTypes.SLASH -> PUNCTUATION_KEYS
-            
-            // Bad character
-            WslTokenTypes.BAD_CHARACTER -> BAD_CHAR_KEYS
-            
+        return when {
+            WslTokenTypes.KEYWORDS.contains(tokenType) -> KEYWORD_KEYS
+            WslTokenTypes.LITERALS.contains(tokenType) -> KEYWORD_KEYS
+            WslTokenTypes.OPERATORS.contains(tokenType) -> OPERATOR_KEYS
+            WslTokenTypes.COMMENTS.contains(tokenType) -> COMMENT_KEYS
+            tokenType == WslTokenTypes.STRING -> STRING_KEYS
+            tokenType == WslTokenTypes.NUMBER -> NUMBER_KEYS
+            tokenType == WslTokenTypes.IDENTIFIER -> IDENTIFIER_KEYS
+            tokenType == WslTokenTypes.LBRACE || tokenType == WslTokenTypes.RBRACE -> BRACES_KEYS
+            tokenType == WslTokenTypes.LPAREN || tokenType == WslTokenTypes.RPAREN -> PARENTHESES_KEYS
+            tokenType == WslTokenTypes.LBRACKET || tokenType == WslTokenTypes.RBRACKET -> BRACES_KEYS
+            tokenType == WslTokenTypes.DOLLAR -> REFERENCE_KEYS
+            tokenType == WslTokenTypes.TEMPLATE_START || tokenType == WslTokenTypes.TEMPLATE_END -> TEMPLATE_KEYS
+            tokenType == WslTokenTypes.COLON ||
+                tokenType == WslTokenTypes.COMMA ||
+                tokenType == WslTokenTypes.DOT ||
+                tokenType == WslTokenTypes.SLASH -> PUNCTUATION_KEYS
+            tokenType == WslTokenTypes.BAD_CHARACTER -> BAD_CHAR_KEYS
             else -> EMPTY_KEYS
         }
     }

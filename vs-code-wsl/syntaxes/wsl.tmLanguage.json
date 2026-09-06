@@ -49,15 +49,31 @@
       "patterns": [
         {
           "name": "keyword.control.wsl",
-          "match": "\\b(module|import|extends|const|workflow|state|action|on|end|start|context|as|else)\\b"
+          "match": "\\b(module|import|extends|const|workflow|state|action|on|end|start|context|as|else|if|when|continue|skip|to)\\b"
+        },
+        {
+          "name": "keyword.control.loop.wsl",
+          "match": "\\b(foreach|while|in)\\b"
+        },
+        {
+          "name": "keyword.control.parallel.wsl",
+          "match": "\\b(parallel|wait|join|branch)\\b"
+        },
+        {
+          "name": "keyword.other.attribute.wsl",
+          "match": "\\b(let|retry|def)\\b"
         },
         {
           "name": "keyword.control.flow.wsl",
           "match": "\\b(success|error|fail|ok)\\b"
         },
         {
+          "name": "support.function.builtin.wsl",
+          "match": "\\b(len|lower|upper|contains|startsWith|endsWith|int|float|string|bool|default|has)\\b(?=\\s*\\()"
+        },
+        {
           "name": "constant.language.boolean.wsl",
-          "match": "\\b(true|false)\\b"
+          "match": "\\b(true|false|null)\\b"
         }
       ]
     },
@@ -91,7 +107,19 @@
       "patterns": [
         {
           "name": "keyword.operator.arrow.wsl",
-          "match": "->"
+          "match": "->|<-"
+        },
+        {
+          "name": "keyword.operator.comparison.wsl",
+          "match": "==|!=|<=|>=|<|>"
+        },
+        {
+          "name": "keyword.operator.logical.wsl",
+          "match": "&&|\\|\\||!|\\?\\?"
+        },
+        {
+          "name": "keyword.operator.arithmetic.wsl",
+          "match": "\\+|-|\\*|/|%"
         },
         {
           "name": "keyword.operator.wsl",
@@ -203,11 +231,36 @@
           "end": ">>",
           "patterns": [
             {
+              "include": "#operators"
+            },
+            {
               "include": "#identifiers"
             },
             {
               "name": "keyword.operator.pipe.wsl",
               "match": "\\|"
+            }
+          ]
+        },
+        {
+          "name": "meta.interpolation.wsl",
+          "begin": "\\$\\{",
+          "end": "\\}",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.interpolation.begin.wsl" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.interpolation.end.wsl" }
+          },
+          "patterns": [
+            {
+              "include": "#numbers"
+            },
+            {
+              "include": "#operators"
+            },
+            {
+              "include": "#identifiers"
             }
           ]
         }

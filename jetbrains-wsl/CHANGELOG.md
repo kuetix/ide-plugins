@@ -1,6 +1,22 @@
 # Change Log
 
-All notable changes to the WSL Language Support extension will be documented in this file.
+All notable changes to the WSL Language Support plugin will be documented in this file.
+
+## [1.5.0] - 2026
+
+### Added
+- Lexing and syntax highlighting for the engine's expression / control-flow
+  constructs:
+  - keywords `if`, `when`, `let`, `foreach`, `in`, `while`, `retry`, `parallel`,
+    `wait`, `join`, `branch`, `continue`, `skip`, `def`, and the `null` literal
+  - expression operators `== != >= <= && || ?? < > ! + * %`, and `<-`
+  - bracket tokens `[` `]`
+- Completion entries for `if`, `let`, `retry`, `foreach`, `while`, `when`,
+  `continue on fail`, `skip to`.
+
+Note: the parser is intentionally forgiving (unknown tokens in a state body are
+skipped), so `let` / `foreach` / `while` / `retry` blocks highlight correctly
+without dedicated PSI nodes. Structured PSI for these is a follow-up.
 
 ## [1.0.0] - 2024
 

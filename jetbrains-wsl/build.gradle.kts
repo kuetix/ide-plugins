@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.kuetix"
-version = "1.4.1"
+version = "1.5.0"
 
 val intellijPlatformVersion: String by project
 val pluginSinceBuild: String by project

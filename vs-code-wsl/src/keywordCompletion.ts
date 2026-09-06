@@ -1,9 +1,11 @@
 import * as vscode from 'vscode';
 
 const WSL_KEYWORDS = [
-    'module', 'import', 'extends', 'const', 'workflow', 'state', 
+    'module', 'import', 'extends', 'const', 'workflow', 'state',
     'action', 'on', 'end', 'start', 'context', 'as', 'else',
-    'success', 'error', 'fail', 'ok', 'true', 'false'
+    'if', 'when', 'let', 'foreach', 'in', 'while', 'retry', 'parallel',
+    'continue on fail', 'skip to',
+    'success', 'error', 'fail', 'ok', 'true', 'false', 'null'
 ];
 
 const KEYWORD_DETAILS: { [key: string]: string } = {
@@ -19,13 +21,24 @@ const KEYWORD_DETAILS: { [key: string]: string } = {
     'start': 'Specifies the initial state of a workflow',
     'context': 'Context keyword',
     'as': 'Alias keyword for naming results',
-    'else': 'Else condition',
+    'else': 'Path taken when an `if` condition is false',
+    'if': 'Pre-condition: skip the state (take `else`) when the expression is falsy',
+    'when': 'Guard on a transition: `on success when <expr> -> Next` (first truthy guard wins)',
+    'let': 'Bind an intermediate value before the action: `let name = <expr>` (single-assignment)',
+    'foreach': 'Loop the body action over a collection: `foreach x in <expr> [parallel[limit: K]] { action ... }`',
+    'in': 'Separates the loop variable from the collection in `foreach`',
+    'while': 'Loop the body while an expression is truthy: `while[max: N] <expr> { action ... }` (max required)',
+    'retry': 'Re-run the action after a failure: `retry[max: N, delay: "200ms", on: "<expr>"]`',
+    'parallel': 'Concurrency: `parallel[count: N]` state, or `foreach ... parallel[limit: K]`',
+    'continue on fail': 'Proceed even if the action errors',
+    'skip to': 'Skip this state under certain conditions',
     'success': 'Success transition condition',
-    'error': 'Error transition condition',
-    'fail': 'Fail keyword',
-    'ok': 'OK keyword',
+    'error': 'Error transition condition (alias: fail)',
+    'fail': 'Failure transition condition',
+    'ok': 'Terminal success: `end ok`',
     'true': 'Boolean true literal',
-    'false': 'Boolean false literal'
+    'false': 'Boolean false literal',
+    'null': 'Null literal'
 };
 
 export class KeywordCompletionProvider implements vscode.CompletionItemProvider {
@@ -58,6 +71,20 @@ export class KeywordCompletionProvider implements vscode.CompletionItemProvider 
             } else if (keyword === 'const') {
                 item.insertText = new vscode.SnippetString(
                     'const {\n  ${1:key}: "${2:value}"$0\n}'
+                );
+            } else if (keyword === 'let') {
+                item.insertText = new vscode.SnippetString('let ${1:name} = ${2:expr}');
+            } else if (keyword === 'foreach') {
+                item.insertText = new vscode.SnippetString(
+                    'foreach ${1:item} in ${2:<<collection>>} {\n  action ${3:module/method}(${4:params}) as ${5:Result}\n}'
+                );
+            } else if (keyword === 'while') {
+                item.insertText = new vscode.SnippetString(
+                    'while[max: ${1:500}] ${2:<<condition>>} {\n  action ${3:module/method}(${4:params}) as ${5:Result}\n}'
+                );
+            } else if (keyword === 'retry') {
+                item.insertText = new vscode.SnippetString(
+                    'retry[max: ${1:3}, delay: "${2:200ms}", on: "${3:err.retryable == true}"]'
                 );
             }
 

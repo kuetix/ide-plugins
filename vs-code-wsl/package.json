@@ -2,7 +2,7 @@
   "name": "wsl-language-support",
   "displayName": "WSL Language Support",
   "description": "Provides language support for the Kuetix Workflow Specific Language (.wsl and .swsl files)",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "publisher": "kuetix",
   "icon": "images/icon.png",
   "engines": {
