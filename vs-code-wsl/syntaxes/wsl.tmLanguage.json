@@ -22,13 +22,13 @@
       "include": "#objects"
     },
     {
-      "include": "#operators"
+      "include": "#templates"
     },
     {
       "include": "#identifiers"
     },
     {
-      "include": "#templates"
+      "include": "#operators"
     }
   ],
   "repository": {
@@ -119,7 +119,7 @@
         },
         {
           "name": "keyword.operator.arithmetic.wsl",
-          "match": "\\+|-|\\*|/|%"
+          "match": "(?<=\\s)[+*%](?=\\s)"
         },
         {
           "name": "keyword.operator.wsl",
